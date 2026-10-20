@@ -1,0 +1,282 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Prolifi design tokens
+   Raw palette lives in :root. Components only use the semantic tokens
+   exposed through @theme (bg-canvas, text-ink, bg-inverse, ...).
+   Brand colours (fixed by the brand brief): navy #0E3062, yellow #F4C430,
+   white #FFFFFF, light neutral #F7F8FA. Other shades are derived from them.
+------------------------------------------------------------------- */
+:root {
+  --palette-navy-950: #081d3d;
+  --palette-navy-900: #0e3062; /* brand navy */
+  --palette-navy-800: #163c74;
+  --palette-navy-700: #1f4c8c;
+  --palette-blue-500: #3978e8;
+  --palette-yellow-400: #f4c430; /* brand yellow */
+  --palette-yellow-300: #f7d363;
+  --palette-cream: #f7f8fa; /* brand light neutral */
+  --palette-cream-deep: #eef1f5;
+  --palette-white: #ffffff;
+  --palette-ink: #0f1b30;
+  --palette-ink-muted: #56627a;
+
+  /* Height reserved by the floating header; first sections pad by this amount */
+  --header-h: 84px;
+
+  /* Founder portrait card, sampled from the approved founders design */
+  --portrait-gradient: linear-gradient(
+    to bottom,
+    rgb(255 255 255) 0%,
+    rgb(246 246 246) 10%,
+    rgb(238 238 238) 20%,
+    rgb(229 229 231) 30%,
+    rgb(226 225 228) 40%,
+    rgb(222 222 224) 50%,
+    rgb(222 222 224) 60%,
+    rgb(224 223 228) 70%,
+    rgb(227 226 231) 80%,
+    rgb(232 231 238) 90%,
+    rgb(238 237 242) 100%
+  );
+}
+
+@theme inline {
+  /* Surfaces */
+  --color-canvas: var(--palette-cream);
+  --color-canvas-deep: var(--palette-cream-deep);
+  --color-surface: var(--palette-white);
+  --color-inverse: var(--palette-navy-900);
+  --color-inverse-deep: var(--palette-navy-950);
+  --color-inverse-raised: var(--palette-navy-800);
+  --color-brand: var(--palette-navy-700);
+
+  /* Text */
+  --color-ink: var(--palette-ink);
+  --color-ink-muted: var(--palette-ink-muted);
+  --color-heading: var(--palette-navy-900);
+  --color-on-inverse: #f4f6fb;
+  --color-on-inverse-muted: #a7b3cc;
+
+  /* Accent: warm yellow is the single brand accent. Electric blue is
+     reserved for focus rings and inline links. */
+  --color-accent: var(--palette-yellow-400);
+  --color-accent-soft: var(--palette-yellow-300);
+  /* Brand yellow darkened for small text on light backgrounds (WCAG AA 4.5:1 on white) */
+  --color-accent-strong: #8f6700;
+  --color-on-accent: var(--palette-navy-900);
+  --color-link: var(--palette-blue-500);
+  --color-focus: var(--palette-blue-500);
+  --color-danger: #b42318;
+  --color-success: #067647;
+
+  /* Lines */
+  --color-line: rgb(14 48 98 / 0.1);
+  --color-line-strong: rgb(14 48 98 / 0.18);
+  --color-line-inverse: rgb(255 255 255 / 0.1);
+
+  /* Tokens used by Magic UI components */
+  --color-background: var(--palette-white);
+  --color-border: rgb(14 48 98 / 0.1);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  /* Type scale */
+  --text-display: clamp(2.5rem, 5.4vw, 4.4rem);
+  --text-display--line-height: 1;
+  --text-display--letter-spacing: -0.045em;
+  --text-h1: clamp(2.4rem, 5vw, 4.4rem);
+  --text-h1--line-height: 1.02;
+  --text-h1--letter-spacing: -0.04em;
+  --text-h2: clamp(1.95rem, 3.6vw, 3.25rem);
+  --text-h2--line-height: 1.06;
+  --text-h2--letter-spacing: -0.035em;
+  --text-h3: clamp(1.3rem, 1.8vw, 1.6rem);
+  --text-h3--line-height: 1.2;
+  --text-h3--letter-spacing: -0.02em;
+  --text-lead: clamp(1.075rem, 1.3vw, 1.25rem);
+  --text-lead--line-height: 1.6;
+  --text-label: 0.75rem;
+  --text-label--line-height: 1;
+  --text-label--letter-spacing: 0.14em;
+
+  /* Radius rule: pills for buttons and chips, 1.5rem for panels,
+     1rem for nested cards, 0.75rem for inputs. */
+  --radius-panel: 1.5rem;
+  --radius-card: 1rem;
+  --radius-field: 0.75rem;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* Motion tokens (CSS side). JS reveals use the same values from src/lib/motion.ts */
+  --ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-button: 380ms;
+  /* Button reveal: colour ball, label roll and arrow share this one timing */
+  --duration-button-reveal: 600ms;
+  --ease-button: cubic-bezier(0.65, 0.05, 0, 1);
+
+  --shadow-soft: 0 1px 2px rgb(14 48 98 / 0.04), 0 12px 32px -16px rgb(14 48 98 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(14 48 98 / 0.05), 0 30px 60px -28px rgb(14 48 98 / 0.35);
+
+  /* Floating hero cards: each card sets its own --float-duration and --float-distance */
+  --animate-float: float var(--float-duration, 7s) ease-in-out infinite alternate;
+
+  @keyframes float {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(0, var(--float-distance, -8px), 0);
+    }
+  }
+
+  --animate-drift-a: drift-a 26s var(--ease-spring) infinite alternate;
+  --animate-drift-b: drift-b 32s var(--ease-spring) infinite alternate;
+  --animate-drift-c: drift-c 38s var(--ease-spring) infinite alternate;
+
+  @keyframes drift-a {
+    from {
+      transform: translate3d(-6%, -4%, 0) scale(1);
+    }
+    to {
+      transform: translate3d(8%, 6%, 0) scale(1.15);
+    }
+  }
+  @keyframes drift-b {
+    from {
+      transform: translate3d(5%, 4%, 0) scale(1.1);
+    }
+    to {
+      transform: translate3d(-7%, -5%, 0) scale(0.95);
+    }
+  }
+  @keyframes drift-c {
+    from {
+      transform: translate3d(0, 6%, 0) scale(0.9);
+    }
+    to {
+      transform: translate3d(-5%, -6%, 0) scale(1.1);
+    }
+  }
+
+  --animate-marquee: marquee var(--duration) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+  @keyframes marquee-vertical {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-padding-top: 6rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  /* Slide-in reveals start up to ~40px off-axis; clip (not hidden) so they never
+     cause sideways scrolling and sticky positioning keeps working. */
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  body {
+    background: var(--palette-cream);
+    color: var(--palette-ink);
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    background: var(--palette-yellow-400);
+    color: var(--palette-navy-900);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--palette-blue-500);
+    outline-offset: 3px;
+  }
+
+  /* Marquees and ambient gradients stop for people who ask for less motion */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee,
+    .animate-marquee-vertical,
+    .animate-drift-a,
+    .animate-drift-b,
+    .animate-drift-c,
+    .animate-float {
+      animation-play-state: paused !important;
+    }
+  }
+}
+
+@layer utilities {
+  .container-page {
+    width: 100%;
+    max-width: 1320px;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .container-page {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Fine grid used behind dark sections. Static, so it costs nothing to scroll. */
+  .bg-grid-inverse {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  /* Subtle edge highlight for elevated surfaces on navy */
+  .edge-inverse {
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.08);
+  }
+
+  /* Glass surface for use over the hero video and gradients. No backdrop blur
+     on scrolling content (expensive); depth comes from tint, hairline and highlight. */
+  .glass-surface {
+    background: linear-gradient(140deg, rgb(255 255 255 / 0.12), rgb(255 255 255 / 0.03));
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.18),
+      inset 0 0 0 1px rgb(255 255 255 / 0.1),
+      0 20px 50px -24px rgb(3 12 30 / 0.6);
+  }
+
+  /* Founder portrait card background */
+  .bg-portrait {
+    background-image: var(--portrait-gradient);
+  }
+}
