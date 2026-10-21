@@ -10,6 +10,7 @@ import {
 import { legalLine, nav, site, socials } from "@/content/site";
 import { pillars } from "@/content/services";
 import { Logo } from "@/components/logo";
+import { Reveal } from "@/components/ui/blur-fade";
 
 const socialIcons = {
   LinkedIn: LinkedinLogo,
@@ -98,8 +99,10 @@ export function SiteFooter() {
         </div>
       </div>
 
-      {/* Oversized wordmark, carried over from the original footer, using the official logo */}
+      {/* Oversized wordmark, carried over from the original footer, using the official logo.
+          It rises into place once as the footer comes into view: the page's closing gesture. */}
       <div aria-hidden className="container-page select-none overflow-hidden pt-6">
+        <Reveal inView variant="fade-up" duration={0.9} amount={0.2}>
         <Image
           src="/brand/prolifi-logo-white.png"
           alt=""
@@ -108,6 +111,7 @@ export function SiteFooter() {
           sizes="100vw"
           className="h-auto w-full translate-y-[22%] opacity-[0.06] grayscale"
         />
+        </Reveal>
       </div>
     </footer>
   );

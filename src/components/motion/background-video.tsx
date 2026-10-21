@@ -14,20 +14,42 @@ import { cn } from "@/lib/utils";
  *   saving get the still poster instead.
  * - Pauses while scrolled out of view and resumes when it returns.
  * - Never receives pointer events.
+ * - `lazy`: the video file is only requested once the element is within
+ *   about one screen of the viewport (for below-the-fold media). Until then,
+ *   and if it never loads, the poster shows.
  */
 export function AnimatedBackgroundVideo({
   src,
   poster,
   className,
+  lazy = false,
 }: {
   src: string;
   poster: string;
   className?: string;
+  lazy?: boolean;
 }) {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLVideoElement>(null);
   const [allowed, setAllowed] = useState(false);
   const [playing, setPlaying] = useState(false);
+  const boxRef = useRef<HTMLDivElement>(null);
+  const [near, setNear] = useState(!lazy);
+
+  useEffect(() => {
+    if (near || !boxRef.current) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setNear(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "100% 0px" }
+    );
+    io.observe(boxRef.current);
+    return () => io.disconnect();
+  }, [near]);
 
   useEffect(() => {
     const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
@@ -36,7 +58,7 @@ export function AnimatedBackgroundVideo({
 
   useEffect(() => {
     const v = ref.current;
-    if (!allowed || !v) return;
+    if (!allowed || !near || !v) return;
 
     // React does not render the `muted` attribute; browsers only allow
     // autoplay for muted media, so set it explicitly before playing.
@@ -67,13 +89,13 @@ export function AnimatedBackgroundVideo({
       v.removeEventListener("playing", onPlaying);
       v.removeEventListener("canplay", tryPlay);
     };
-  }, [allowed]);
+  }, [allowed, near]);
 
   return (
-    <div aria-hidden className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}>
+    <div ref={boxRef} aria-hidden className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}>
       {/* Poster: shown until the first frame plays, and permanently when the video is not used */}
       <div className="absolute inset-0 bg-inverse bg-cover bg-center" style={{ backgroundImage: `url(${poster})` }} />
-      {allowed && (
+      {allowed && near && (
         <video
           ref={ref}
           className={cn(
@@ -86,7 +108,7 @@ export function AnimatedBackgroundVideo({
           loop
           playsInline
           autoPlay
-          preload="auto"
+          preload={lazy ? "metadata" : "auto"}
           disablePictureInPicture
           tabIndex={-1}
         />

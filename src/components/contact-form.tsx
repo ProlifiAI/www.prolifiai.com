@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type FormEvent, type ReactNode } from "react";
+import { useRef, useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
 import { useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { CheckCircle, WarningCircle, CaretDown } from "@phosphor-icons/react";
@@ -131,37 +131,42 @@ export function ContactForm() {
     <form
       ref={formRef}
       onSubmit={onSubmit}
+      onChange={(e) => {
+        const name = (e.target as unknown as HTMLInputElement).name as keyof ContactInput;
+        if (errors[name]) setErrors((prev) => ({ ...prev, [name]: undefined }));
+      }}
       noValidate
       aria-describedby="form-note"
       className="rounded-panel bg-surface p-6 shadow-soft ring-1 ring-line sm:p-8 md:p-10"
     >
-      <p id="form-note" className="mb-8 text-sm text-ink-muted">
+      <p id="form-note" className="mb-7 text-sm text-ink-muted">
         Fields marked <span aria-hidden className="text-danger">*</span>
         <span className="sr-only">with an asterisk</span> are required.
       </p>
 
-      <div className="grid gap-6 sm:grid-cols-2">
+      {/* Desktop: names, email, business + location, service + budget, details. Phones: one column. */}
+      <fieldset disabled={pending} className="grid min-w-0 gap-x-5 gap-y-2 sm:grid-cols-2">
         <Field name="firstName" label="First name" required error={errors.firstName}>
-          {(p) => <input {...p} type="text" autoComplete="given-name" />}
+          {(p) => <input {...p} type="text" autoComplete="given-name" placeholder="e.g. Paul" />}
         </Field>
         <Field name="lastName" label="Last name" required error={errors.lastName}>
-          {(p) => <input {...p} type="text" autoComplete="family-name" />}
+          {(p) => <input {...p} type="text" autoComplete="family-name" placeholder="e.g. Stephen" />}
         </Field>
         <Field name="email" label="Email" required error={errors.email} className="sm:col-span-2">
-          {(p) => <input {...p} type="email" autoComplete="email" inputMode="email" />}
+          {(p) => <input {...p} type="email" autoComplete="email" inputMode="email" placeholder="you@company.com" />}
         </Field>
         <Field name="business" label="Business name" error={errors.business}>
-          {(p) => <input {...p} type="text" autoComplete="organization" />}
+          {(p) => <input {...p} type="text" autoComplete="organization" placeholder="Your business or organisation" />}
         </Field>
-        <Field name="location" label="Location" hint="City or country" error={errors.location}>
-          {(p) => <input {...p} type="text" autoComplete="address-level2" />}
+        <Field name="location" label="Location" error={errors.location}>
+          {(p) => <input {...p} type="text" autoComplete="address-level2" placeholder="City or country" />}
         </Field>
         <Field name="service" label="Service of interest" required error={errors.service}>
           {(p) => (
             <SelectWrap>
-              <select {...p} defaultValue={initial.service}>
+              <select {...p} defaultValue={initial.service} data-empty={!initial.service} onChange={markEmpty}>
                 <option value="" disabled>
-                  Choose a service
+                  Select a service
                 </option>
                 {pillars.map((pillar) => (
                   <optgroup key={pillar.id} label={`${pillar.name}: ${pillar.focus}`}>
@@ -186,11 +191,12 @@ export function ContactForm() {
             </SelectWrap>
           )}
         </Field>
-        <Field name="budget" label="Budget range" hint="Optional" error={errors.budget}>
+        <Field name="budget" label="Budget range" error={errors.budget}>
           {(p) => (
             <SelectWrap>
-              <select {...p} defaultValue="">
-                <option value="">Prefer not to say</option>
+              {/* Optional: the empty first option doubles as the placeholder and as "no answer" */}
+              <select {...p} defaultValue="" data-empty onChange={markEmpty}>
+                <option value="">Select your budget range</option>
                 {budgetOptions.map((b) => (
                   <option key={b} value={b}>
                     {b}
@@ -200,15 +206,16 @@ export function ContactForm() {
             </SelectWrap>
           )}
         </Field>
-        <Field
-          name="details"
-          label="Project details"
-          required
-          hint="What do you need, and what would success look like?"
-          error={errors.details}
-          className="sm:col-span-2"
-        >
-          {(p) => <textarea {...p} rows={6} defaultValue={initial.details} className={cn(p.className, "min-h-40 resize-y py-3")} />}
+        <Field name="details" label="Project details" required error={errors.details} className="sm:col-span-2">
+          {(p) => (
+            <textarea
+              {...p}
+              rows={6}
+              defaultValue={initial.details}
+              placeholder="Tell us about your project, what you need, and what success looks like..."
+              className={cn(p.className, "h-auto min-h-40 resize-y py-3 leading-relaxed")}
+            />
+          )}
         </Field>
 
         {/* Honeypot, hidden from people and assistive technology */}
@@ -218,7 +225,7 @@ export function ContactForm() {
             <input type="text" name="website" tabIndex={-1} autoComplete="off" />
           </label>
         </div>
-      </div>
+      </fieldset>
 
       <div ref={statusRef} tabIndex={-1} aria-live="polite" className="outline-none">
         <AnimatePresence mode="wait">
@@ -247,7 +254,7 @@ export function ContactForm() {
         </AnimatePresence>
       </div>
 
-      <div className="mt-8 flex flex-col-reverse gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-6 flex flex-col-reverse gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm text-ink-muted">We only use your details to reply to your enquiry.</p>
         <SubmitButton pending={pending}>{pending ? "Sending..." : "Send Message"}</SubmitButton>
       </div>
@@ -266,14 +273,32 @@ type ControlProps = {
   className: string;
 };
 
-const controlClass =
-  "w-full rounded-field bg-canvas px-4 py-3 text-base text-ink ring-1 ring-inset ring-line-strong transition-[box-shadow,background-color] placeholder:text-ink-muted hover:ring-heading/30 focus:bg-surface focus:outline-none focus:ring-2 focus:ring-focus aria-[invalid=true]:ring-2 aria-[invalid=true]:ring-danger";
+/**
+ * One look for every control: 48px tall, pale neutral fill, thin blue-grey
+ * border; hover darkens the border, focus turns it navy with a soft navy
+ * halo, errors turn it red. Placeholders are muted so they read as examples,
+ * never as entered text. A closed select still showing its placeholder
+ * (data-empty) uses the same muted colour.
+ */
+const controlClass = cn(
+  "h-12 w-full rounded-field bg-canvas px-4 text-[0.95rem] text-ink ring-1 ring-inset ring-line-strong",
+  "transition-[box-shadow,background-color] duration-200",
+  "placeholder:text-ink-muted/70 data-[empty=true]:text-ink-muted/80",
+  "hover:ring-heading/35",
+  "focus:bg-surface focus:outline-none focus:ring-[1.5px] focus:ring-heading focus:shadow-[0_0_0_4px_rgb(14_48_98/0.08)]",
+  "aria-[invalid=true]:ring-[1.5px] aria-[invalid=true]:ring-danger aria-[invalid=true]:focus:shadow-[0_0_0_4px_rgb(180_35_24/0.1)]",
+  "disabled:cursor-not-allowed disabled:opacity-60"
+);
+
+/** Keeps a select's placeholder styling in sync with whether a real option is chosen. */
+function markEmpty(e: ChangeEvent<HTMLSelectElement>) {
+  e.currentTarget.dataset.empty = String(!e.currentTarget.value);
+}
 
 function Field({
   name,
   label,
   required,
-  hint,
   error,
   className,
   children,
@@ -281,14 +306,12 @@ function Field({
   name: keyof ContactInput;
   label: string;
   required?: boolean;
-  hint?: string;
   error?: string;
   className?: string;
   children: (props: ControlProps) => ReactNode;
 }) {
   const id = `field-${name}`;
-  const hintId = hint ? `${id}-hint` : undefined;
-  const errorId = error ? `${id}-error` : undefined;
+  const errorId = `${id}-error`;
   return (
     <div className={cn("flex flex-col gap-2", className)}>
       <label htmlFor={id} className="text-sm font-medium text-heading">
@@ -299,34 +322,32 @@ function Field({
           </span>
         )}
       </label>
-      {hint && (
-        <p id={hintId} className="-mt-1 text-sm text-ink-muted">
-          {hint}
-        </p>
-      )}
       {children({
         id,
         name,
         required,
         "aria-invalid": error ? true : undefined,
-        "aria-describedby": [hintId, errorId].filter(Boolean).join(" ") || undefined,
+        "aria-describedby": error ? errorId : undefined,
         className: controlClass,
       })}
-      {error && (
-        <p id={errorId} className="flex items-center gap-1.5 text-sm text-danger">
-          <WarningCircle size={16} weight="fill" aria-hidden />
-          {error}
-        </p>
-      )}
+      {/* Space for one line of error text is always reserved, so messages never push the form around */}
+      <p id={errorId} className="flex min-h-5 items-start gap-1.5 text-[0.8rem] leading-5 text-danger">
+        {error && (
+          <>
+            <WarningCircle size={15} weight="fill" aria-hidden className="mt-[3px] shrink-0" />
+            {error}
+          </>
+        )}
+      </p>
     </div>
   );
 }
 
 function SelectWrap({ children }: { children: ReactNode }) {
   return (
-    <div className="relative [&>select]:appearance-none [&>select]:pr-10">
+    <div className="relative [&>select]:cursor-pointer [&>select]:appearance-none [&>select]:pr-11">
       {children}
-      <CaretDown size={16} aria-hidden className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-ink-muted" />
+      <CaretDown size={15} aria-hidden className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-ink-muted" />
     </div>
   );
 }

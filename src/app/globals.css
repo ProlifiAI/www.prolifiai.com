@@ -160,6 +160,19 @@
     }
   }
 
+  /* A wide band of the existing navy tones sliding left to right and back:
+     the "flowing" layer of GlassGradientBackground. Transform only. */
+  --animate-flow: flow 14s ease-in-out infinite alternate;
+
+  @keyframes flow {
+    from {
+      transform: translate3d(-50%, 0, 0);
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
   --animate-marquee: marquee var(--duration) infinite linear;
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
 
@@ -226,6 +239,7 @@
     .animate-drift-a,
     .animate-drift-b,
     .animate-drift-c,
+    .animate-flow,
     .animate-float {
       animation-play-state: paused !important;
     }

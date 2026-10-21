@@ -16,6 +16,7 @@ import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/ui/blur-fade";
 import { BuildArt, LaunchArt, ScaleArt } from "@/components/stage-art";
 import { useStill } from "@/components/motion/use-still";
+import { AnimatedBackgroundVideo } from "@/components/motion/background-video";
 
 /**
  * "What We Do": BUILD > LAUNCH > SCALE as a full-scale, scroll-driven stack.
@@ -235,11 +236,18 @@ export function WhatWeDo() {
           >
             <span className="block">Build,</span>
             <span className="flex items-center gap-[0.18em]">
+              {/* The supplied Build/Launch/Grow capsule clip, cropped to its gold-rimmed pill
+                  (2.22:1), so the pill itself is the chip; its own gold rim replaces the ring */}
               <span
                 aria-hidden
-                className="inline-block h-[0.72em] w-[1.5em] shrink-0 rounded-full bg-cover bg-center ring-[0.06em] ring-accent"
-                style={{ backgroundImage: "url(/video/hero-poster.jpg)" }}
-              />
+                className="relative inline-block aspect-[2.22] h-[0.72em] shrink-0 overflow-hidden rounded-full bg-inverse"
+              >
+                <AnimatedBackgroundVideo
+                  src="/video/build-launch-scale-chip.mp4"
+                  poster="/video/build-launch-scale-chip-poster.jpg"
+                  lazy
+                />
+              </span>
               Launch,
             </span>
             <span className="block text-right">

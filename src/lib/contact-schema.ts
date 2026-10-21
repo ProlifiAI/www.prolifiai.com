@@ -10,17 +10,17 @@ export const budgetOptions = [
 ] as const;
 
 export const contactSchema = z.object({
-  firstName: z.string().trim().min(1, "Please enter your first name.").max(80),
-  lastName: z.string().trim().min(1, "Please enter your last name.").max(80),
-  email: z.email("Please enter a valid email address.").max(200),
+  firstName: z.string({ error: "Please enter your first name." }).trim().min(1, "Please enter your first name.").max(80),
+  lastName: z.string({ error: "Please enter your last name." }).trim().min(1, "Please enter your last name.").max(80),
+  email: z.email({ error: "Please enter a valid email address." }).max(200),
   business: z.string().trim().max(120).optional().default(""),
   location: z.string().trim().max(120).optional().default(""),
-  service: z.string().trim().min(1, "Please choose the service you are interested in.").max(80),
+  service: z.string({ error: "Please choose a service." }).trim().min(1, "Please choose a service.").max(80),
   budget: z.string().trim().max(40).optional().default(""),
   details: z
-    .string()
+    .string({ error: "Please add a little more detail (20+ characters)." })
     .trim()
-    .min(20, "Please tell us a little more about your project (at least 20 characters).")
+    .min(20, "Please add a little more detail (20+ characters).")
     .max(5000, "Please keep your message under 5,000 characters."),
   /** Honeypot: real visitors never see or fill this field */
   website: z.string().max(0).optional().default(""),

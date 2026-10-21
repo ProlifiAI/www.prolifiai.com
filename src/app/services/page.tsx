@@ -71,13 +71,13 @@ function PillarSection({ pillar, index }: { pillar: Pillar; index: number }) {
     <section
       id={pillar.id}
       aria-labelledby={`${pillar.id}-title`}
-      className={cn("scroll-mt-20 py-24 md:py-32", index % 2 === 1 ? "bg-surface" : "bg-canvas")}
+      className={cn("scroll-mt-[calc(var(--header-h)+1rem)] py-24 md:py-32", index % 2 === 1 ? "bg-surface" : "bg-canvas")}
     >
       {/* Links shared before the GROW > LAUNCH rename still land here */}
       {Object.entries(legacyPillarIds)
         .filter(([, to]) => to === pillar.id)
         .map(([from]) => (
-          <span key={from} id={from} aria-hidden className="block scroll-mt-20" />
+          <span key={from} id={from} aria-hidden className="block scroll-mt-[calc(var(--header-h)+1rem)]" />
         ))}
       <div className="container-page">
         <div className="grid items-end gap-10 lg:grid-cols-12">

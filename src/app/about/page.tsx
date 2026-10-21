@@ -125,7 +125,7 @@ export default function AboutPage() {
 
       {/* Values */}
       <section className="relative isolate overflow-hidden py-24 text-on-inverse md:py-32">
-        <GlassGradientBackground grid={false} />
+        <GlassGradientBackground grid={false} flow />
         <div className="container-page">
           <SectionHeading tone="inverse" title="What we stand for" />
           <ul className="mt-14 grid gap-5 md:grid-cols-3">
