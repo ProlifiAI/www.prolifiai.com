@@ -4,7 +4,6 @@ import { ctas } from "@/content/site";
 import { cn } from "@/lib/utils";
 import { ButtonLink } from "@/components/button";
 import { Reveal } from "@/components/ui/blur-fade";
-import { GlassGradientBackground } from "@/components/motion/glass-gradient";
 import { AnimatedBackgroundVideo } from "@/components/motion/background-video";
 import { DrawLine } from "@/components/motion/draw-line";
 import { reveal } from "@/lib/motion";
@@ -72,23 +71,6 @@ function Collaboration() {
 }
 
 /**
- * The supplied "AI and Human Integration" clip: AI-built blocks feeding a
- * human-shaped golden form. Framed like the site's other media (inset bezel,
- * rounded corners), 16:9 so the composition is never cropped, lazy-loaded
- * because the section sits well below the fold. Decorative: the copy beside
- * it carries the meaning.
- */
-function IntegrationVideo() {
-  return (
-    <div className="rounded-[1.6rem] bg-white/[0.06] p-1.5 ring-1 ring-white/10">
-      <div className="relative aspect-video overflow-hidden rounded-[calc(1.6rem-0.375rem)] bg-inverse-deep">
-        <AnimatedBackgroundVideo src="/video/ai-human.mp4" poster="/video/ai-human-poster.jpg" lazy />
-      </div>
-    </div>
-  );
-}
-
-/**
  * "The Prolifi Difference": why Prolifi is not a prompt-to-website service.
  * A dark navy panel inset on the light page, so it reads as its own chapter
  * even next to the dark process section.
@@ -97,7 +79,13 @@ export function ValueProposition() {
   return (
     <section aria-labelledby="difference-title" className="px-3 py-3 md:px-4 md:py-4">
       <div className="relative isolate overflow-hidden rounded-[2rem] text-on-inverse">
-        <GlassGradientBackground grid={false} flow />
+        {/* Background: the supplied "AI and Human Integration" clip in place of the blue gradient.
+            Fills the panel (object-cover), lazy-loaded, poster for reduced motion and data saver.
+            A navy wash, deepest behind the copy on the left, keeps the text readable. */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden bg-inverse">
+          <AnimatedBackgroundVideo src="/video/ai-human.mp4" poster="/video/ai-human-poster.jpg" lazy />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(8_29_61/0.78)_0%,rgb(8_29_61/0.55)_45%,rgb(8_29_61/0.3)_100%)] max-lg:bg-[linear-gradient(180deg,rgb(8_29_61/0.78)_0%,rgb(8_29_61/0.6)_55%,rgb(8_29_61/0.72)_100%)]" />
+        </div>
         <div className="container-page py-20 md:py-28">
           <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-10">
             <div className="lg:col-span-6">
@@ -122,14 +110,9 @@ export function ValueProposition() {
                 </p>
               </Reveal>
             </div>
-            <Reveal inView variant="slide-right" delay={0.12} duration={0.8} className="lg:col-span-6">
-              <IntegrationVideo />
-            </Reveal>
-          </div>
-
-          {/* What AI speeds up and what people decide, meeting at Prolifi */}
-          <div className="mx-auto mt-14 max-w-4xl md:mt-16">
-            <Collaboration />
+            <div className="lg:col-span-6">
+              <Collaboration />
+            </div>
           </div>
 
           <ol className="relative mt-20 grid gap-10 md:grid-cols-3 md:gap-8">

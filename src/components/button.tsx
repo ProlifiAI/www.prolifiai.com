@@ -26,7 +26,7 @@ type Variant = "primary" | "accent" | "outline" | "inverse" | "outline-inverse";
  * the parts swap instantly without moving.
  */
 const base =
-  "group/btn relative isolate inline-flex min-h-12 items-center gap-3 overflow-hidden whitespace-nowrap rounded-full py-1.5 pl-6 pr-1.5 text-[0.95rem] font-medium tracking-[-0.01em] transition-[transform,box-shadow] duration-[var(--duration-button)] ease-[var(--ease-reveal)] hover:scale-[1.025] active:scale-[0.98] motion-reduce:hover:scale-100 focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-focus";
+  "group/btn relative isolate inline-flex min-h-12 shrink-0 items-center gap-3 overflow-hidden whitespace-nowrap rounded-full py-1.5 pl-6 pr-1.5 text-[0.95rem] font-medium tracking-[-0.01em] transition-[transform,box-shadow] duration-[var(--duration-button)] ease-[var(--ease-reveal)] hover:scale-[1.025] active:scale-[0.98] motion-reduce:hover:scale-100 focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-focus";
 
 const reveal = "duration-[var(--duration-button-reveal)] ease-[var(--ease-button)] motion-reduce:transition-none";
 
