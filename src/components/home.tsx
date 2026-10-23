@@ -53,10 +53,10 @@ export function Proposition() {
       <div className="container-page">
         <Reveal inView variant="blur-up" duration={0.8}>
           <p className="max-w-5xl text-balance text-[clamp(1.6rem,3vw,2.6rem)] font-medium leading-[1.2] tracking-[-0.03em] text-heading">
-            Prolifi is a digital studio for small and growing businesses.{" "}
+            Prolifi AI is a strategy, design and development studio for Australian and New Zealand businesses.{" "}
             <span className="text-ink-muted">
-              We combine strategy, design and build so your business is easier to find, easier to trust and ready for
-              what comes next.
+              We help you decide what is worth doing, then build it properly, so customers can find you, trust you and
+              buy from you.
             </span>
           </p>
         </Reveal>
@@ -110,7 +110,7 @@ export function PricingPreview() {
         <SectionHeading
           eyebrow="Pricing"
           title="Website packages with clear, upfront prices"
-          body="One-off prices in US dollars. Social media and product work is quoted to fit your project."
+          body="One-off website prices in US dollars. SEO, social media, MVP and AI work is quoted to fit your project."
         />
         <ul className="mt-14 grid items-stretch gap-5 lg:mt-20 lg:grid-cols-3">
           {websitePackages.map((pkg, i) => (

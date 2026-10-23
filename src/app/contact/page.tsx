@@ -7,12 +7,13 @@ import { pageMetadata } from "@/lib/seo";
 import { processSteps } from "@/content/services";
 import { ContactForm } from "@/components/contact-form";
 import { BlurFade } from "@/components/ui/blur-fade";
+import { DropText } from "@/components/motion/drop-text";
 import { BrandVideoBackground } from "@/components/motion/brand-video-background";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Contact Prolifi AI | Start Your Project",
+  title: "Contact Prolifi AI | Start Your Website, MVP or AI Project",
   description:
-    "Tell Prolifi AI about your business and what you need, from a new website to a launch campaign or product design. We reply by email.",
+    "Tell us about your website, product idea or AI project. Prolifi AI works with businesses across Australia and New Zealand and replies by email.",
   path: "/contact",
 });
 
@@ -29,7 +30,7 @@ export default function ContactPage() {
           <p className="glass-surface mb-6 inline-flex items-center gap-2 rounded-full px-4 py-2 text-label font-semibold uppercase text-accent">
             Contact
           </p>
-          <h1 className="text-balance text-h1 font-semibold">Let&apos;s work together</h1>
+          <DropText as="h1" text="Let's work together" mode="load" intro delay={0.1} className="block text-balance text-h1 font-semibold" />
           <p className="mt-6 max-w-[40ch] text-pretty text-lead text-on-inverse-muted">
             Tell us about your business and what you would like to achieve. The more we know, the better our first
             conversation will be.

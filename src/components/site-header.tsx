@@ -10,6 +10,7 @@ import { ctas, nav } from "@/content/site";
 import { cn } from "@/lib/utils";
 import { ButtonLink } from "@/components/button";
 import { Logo } from "@/components/logo";
+import { RollText } from "@/components/motion/drop-text";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -71,7 +72,7 @@ export function SiteHeader() {
             {/* A soft highlight glides between items on hover or keyboard focus;
                 the yellow underline marks the current page. */}
             <ul className="flex items-center gap-1" onMouseLeave={() => setHovered(null)}>
-              {nav.map((item) => (
+              {nav.map((item, i) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
@@ -80,7 +81,7 @@ export function SiteHeader() {
                     onFocus={() => setHovered(item.href)}
                     onBlur={() => setHovered(null)}
                     className={cn(
-                      "relative isolate block rounded-full px-4 py-2 text-[0.95rem] font-medium transition-colors duration-300",
+                      "roll-host relative isolate block rounded-full px-4 py-2 text-[0.95rem] font-medium transition-colors duration-300",
                       isActive(item.href) || hovered === item.href ? "text-heading" : "text-ink-muted"
                     )}
                   >
@@ -92,7 +93,8 @@ export function SiteHeader() {
                         transition={{ type: "spring", stiffness: 420, damping: 36 }}
                       />
                     )}
-                    {item.label}
+                    {/* Letters drop in on page load (after the intro), then roll on hover */}
+                    <RollText text={item.label} drop intro delay={0.05 + i * 0.07} />
                     {isActive(item.href) && (
                       <motion.span
                         layoutId="nav-active"

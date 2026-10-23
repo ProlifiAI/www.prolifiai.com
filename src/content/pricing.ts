@@ -102,14 +102,14 @@ export const quotedWork = [
   {
     pillar: "Launch",
     pillarId: "launch",
-    title: "Social media and launch campaigns",
-    body: "Priced on the channels, content volume and campaign length you need. Ongoing support or a one-off campaign.",
+    title: "SEO, social media and launch campaigns",
+    body: "Priced on the search visibility, channels and campaign length you need. Ongoing support or a one-off project.",
   },
   {
     pillar: "Scale",
     pillarId: "scale",
-    title: "Product strategy and UX design",
-    body: "Priced on product scope and stage, from a focused strategy sprint to full interface design and prototyping.",
+    title: "Idea validation, MVPs and AI setup",
+    body: "Priced on scope and stage, from a focused validation sprint to an MVP build or an AI setup for your team.",
   },
 ] as const;
 

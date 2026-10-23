@@ -18,13 +18,13 @@ export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.prolifi
 export const site = {
   name: "Prolifi AI",
   alternateName: "Prolifi",
-  title: "Prolifi AI | Websites, Digital Design & Business Solutions",
+  title: "Prolifi AI | Websites, MVPs & AI for Australian & NZ Businesses",
   shortTitle: "Prolifi",
   description:
-    "Prolifi AI is a digital studio for small and growing businesses: websites, social media, product strategy and UI/UX design, built around the Build, Launch and Scale framework.",
+    "Premium websites, MVP development and practical AI setup for Australian and New Zealand businesses. Decide what is worth building, then build it to win customers.",
   /** Short line under the logo in the footer */
   tagline:
-    "Prolifi helps ambitious businesses build their digital presence, reach more customers and turn ideas into practical digital products.",
+    "Prolifi AI helps businesses across Australia and New Zealand decide what is worth building, then builds it properly: websites, products and AI that win customers.",
   /** Where website enquiries are delivered (server-side only; see /api/contact) */
   enquiryEmail: "info@prolifiai.com",
   /** Optional public address shown on the contact page and as a fallback when delivery fails. */

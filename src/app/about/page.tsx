@@ -14,9 +14,9 @@ import { ParallaxImage } from "@/components/motion/parallax";
 import { GlassGradientBackground } from "@/components/motion/glass-gradient";
 
 export const metadata: Metadata = pageMetadata({
-  title: "About Prolifi AI | Our Team & Approach",
+  title: "About Prolifi AI | Strategy, Design & Development Team",
   description:
-    "Meet the founders of Prolifi AI, a digital studio for small and growing businesses that combines strategy, design and execution in one team.",
+    "Meet the team behind Prolifi AI: strategy, design and development for Australian and New Zealand businesses, from premium websites to MVPs and AI setup.",
   path: "/about",
 });
 
@@ -42,7 +42,7 @@ export default function AboutPage() {
         video="about"
         eyebrow="About Prolifi"
         title="A digital studio for businesses ready to grow"
-        intro="We help small and growing businesses build a stronger digital presence, reach more customers and turn good ideas into practical digital products."
+        intro="We help businesses across Australia and New Zealand decide what is worth building, then build it properly: websites that win customers, products worth launching and AI that does useful work."
       />
 
       {/* Why Prolifi exists */}
@@ -52,9 +52,9 @@ export default function AboutPage() {
             <SectionHeading title="Why Prolifi exists" />
             <BlurFade inView direction="up" offset={14} delay={0.1} duration={0.6} className="mt-6 space-y-5 text-lead text-ink-muted">
               <p className="text-pretty">
-                Most growing businesses know they need a better website, a clearer social media presence or a digital
-                product of their own. What they often lack is a partner who explains things plainly, prices work
-                honestly and understands the realities of running a business.
+                Most growing businesses know they need a better website, a way to be found online, or a digital product
+                of their own, and now a sensible way to use AI. What they often lack is a partner who explains things
+                plainly, prices work honestly and says when something is not worth doing.
               </p>
               <p className="text-pretty">
                 Prolifi exists to be that partner. We bring strategy, design and digital execution together in one

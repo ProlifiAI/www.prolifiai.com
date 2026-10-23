@@ -1,12 +1,13 @@
 /**
  * Services, grouped into the three Prolifi pillars: BUILD, LAUNCH, SCALE.
  *
- *   BUILD   establish the digital foundation      (websites, landing pages, redesigns, digital foundations)
- *   LAUNCH  bring the business to market          (social strategy, content planning, social design, campaign creative)
- *   SCALE   expand digital capabilities           (product strategy, UX research, UI/UX design, prototyping and design systems)
+ *   BUILD   premium websites that convert        (websites, landing pages, redesigns, digital foundations)
+ *   LAUNCH  get found and get chosen             (SEO and search visibility, social strategy, content, social design, campaign creative)
+ *   SCALE   validate, build and automate         (idea validation, MVP and web app development, AI tool selection and setup,
+ *                                                  UX research, UI/UX design, prototyping)
  *
- * LAUNCH replaced the earlier GROW pillar and carries the same services; no
- * new capabilities were added. Deliverables describe the shape of the work,
+ * SEO, idea validation, MVP/web app development and AI tool selection were
+ * confirmed as delivered services by Prolifi on 2026-10-23. Deliverables describe the shape of the work,
  * not guaranteed scope; the final scope of every project is agreed in a
  * written proposal.
  */
@@ -46,10 +47,10 @@ export const pillars: Pillar[] = [
   {
     id: "build",
     name: "Build",
-    focus: "Establish the digital foundation",
-    message: "Create a foundation built for what comes next.",
+    focus: "Premium websites that convert",
+    message: "A website built to win customers, not just to look good.",
     intro:
-      "Your website is often the first conversation a customer has with you. We design and build websites, landing pages and the digital essentials behind them, so your business is clear, credible and ready for what comes next.",
+      "Your website is often the first conversation a customer has with you. We plan, design and develop premium websites and landing pages around one goal: helping the right people understand what you do and get in touch. No templates, no generic AI output.",
     image: {
       src: "/images/work/website-design-on-laptop.png",
       alt: "Laptop on a desk showing a website with the headline Build your dream website",
@@ -58,15 +59,15 @@ export const pillars: Pillar[] = [
       {
         slug: "business-websites",
         name: "Business websites",
-        problem: "You have no website, or the one you have does not reflect the business you run today.",
-        forWho: "Small and growing businesses that need a credible home online.",
+        problem: "You have no website, or a template site that looks like everyone else's and does not bring in enquiries.",
+        forWho: "Small and growing businesses across Australia and New Zealand.",
         deliverables: [
-          "Site structure and page plan",
-          "Responsive design for mobile, tablet and desktop",
-          "Build and launch",
-          "SEO-ready foundations",
+          "Customer and message planning",
+          "Conversion-focused page structure",
+          "Responsive design and development",
+          "SEO-ready build and launch",
         ],
-        benefit: "A professional site that answers customer questions before they ask them.",
+        benefit: "A site that answers customer questions and makes it easy to get in touch.",
         available: true,
       },
       {
@@ -81,7 +82,7 @@ export const pillars: Pillar[] = [
       {
         slug: "website-redesigns",
         name: "Website redesigns",
-        problem: "Your current site looks dated, is hard to update or does not work well on phones.",
+        problem: "Your site looks dated, is hard to update, or gets visitors but not enquiries.",
         forWho: "Businesses that have outgrown their first website.",
         deliverables: ["Review of the current site", "Updated structure and content plan", "New design", "Rebuild and launch"],
         benefit: "A site that matches the quality of your work, without losing what already works.",
@@ -101,15 +102,29 @@ export const pillars: Pillar[] = [
   {
     id: "launch",
     name: "Launch",
-    focus: "Bring the business to market",
-    message: "Turn your next big idea into market momentum.",
+    focus: "Get found and get chosen",
+    message: "Help the right customers find you, then choose you.",
     intro:
-      "A new business, offer or idea needs an audience. We shape how you introduce it: the social media strategy, the content plan and the campaign creative that get it in front of the right people and keep them engaged.",
+      "Good businesses lose customers to competitors who are simply easier to find. We improve how you show up on Google and social media, and shape the content and campaigns that get your offer in front of the people already looking for it.",
     image: {
       src: "/images/work/social-media-on-laptop-and-phone.png",
       alt: "Person browsing a social media profile on a laptop while holding a phone",
     },
     services: [
+      {
+        slug: "seo-search-visibility",
+        name: "SEO and search visibility",
+        problem: "Customers search for what you do, and find your competitors instead.",
+        forWho: "Businesses with a good offer that are hard to find on Google.",
+        deliverables: [
+          "Keyword and competitor research",
+          "On-page SEO for your key pages",
+          "Google Business Profile review",
+          "Technical checks and fixes",
+        ],
+        benefit: "Easier to find for the searches that matter to your business, without promises of overnight rankings.",
+        available: true,
+      },
       {
         slug: "social-media-strategy",
         name: "Social media strategy",
@@ -151,10 +166,10 @@ export const pillars: Pillar[] = [
   {
     id: "scale",
     name: "Scale",
-    focus: "Expand digital capabilities",
-    message: "Turn momentum into sustainable progress.",
+    focus: "Validate, build and automate",
+    message: "Test the idea, then build what is worth building.",
     intro:
-      "When a website is no longer enough, you need a product: a platform, an app or an internal tool. We help you shape the idea, design an experience that holds up as more people use it, and prepare it to be built with confidence.",
+      "Before you spend on an app, a platform or another stack of AI tools, find out what is worth it. We research the opportunity, shape a realistic first version, develop MVPs and web apps, and set up AI tools that take real work off your team.",
     image: {
       src: "/images/work/mobile-app-on-smartphone.png",
       alt: "Smartphone showing a social app resting on a laptop keyboard",
@@ -162,11 +177,39 @@ export const pillars: Pillar[] = [
     services: [
       {
         slug: "product-strategy",
-        name: "Product strategy",
-        problem: "You have a product idea but are not sure what to build first.",
-        forWho: "Founders and teams planning a new digital product.",
-        deliverables: ["Goals and user needs workshop", "Feature priorities", "A realistic first release plan"],
-        benefit: "Spend your budget on the features that matter most.",
+        name: "Idea validation and product strategy",
+        problem: "You have an idea, but no evidence yet that customers want it or would pay for it.",
+        forWho: "Founders and businesses planning a new product, platform or app.",
+        deliverables: [
+          "Problem and customer research",
+          "Competitor and alternatives review",
+          "Assumptions to test before you build",
+          "A realistic first-release plan",
+        ],
+        benefit: "A clear go, refine or rethink decision before you commit a development budget.",
+        available: true,
+      },
+      {
+        slug: "product-development",
+        name: "MVP and web app development",
+        problem: "Your idea is ready to test with real users, or your designs need to become a working product.",
+        forWho: "Founders and teams ready to launch a first version.",
+        deliverables: ["Front-end and back-end development", "Testing before launch", "Launch and handover"],
+        benefit: "One team from idea to a working product, without paying for features nobody needs yet.",
+        available: true,
+      },
+      {
+        slug: "ai-tool-selection",
+        name: "AI tool selection and setup",
+        problem: "There are hundreds of AI tools and you do not know which ones fit your business, or how to make them stick.",
+        forWho: "Owners and teams who want AI to save real time, not add another subscription.",
+        deliverables: [
+          "Review of the work you want to speed up",
+          "Shortlist of suitable tools for your budget",
+          "Setup and workflow automation",
+          "Team handover and simple guides",
+        ],
+        benefit: "AI that does useful work in your business, chosen for your needs rather than the hype.",
         available: true,
       },
       {
@@ -242,7 +285,7 @@ export function findPillar(id: string | null | undefined) {
 export const processSteps = [
   {
     title: "Discover",
-    body: "We learn about your business, your customers and what success looks like for this project.",
+    body: "We look at the problem first: your customers, your options and whether the idea or tool is worth it.",
   },
   {
     title: "Plan",

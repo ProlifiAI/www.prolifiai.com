@@ -7,6 +7,10 @@ import { Reveal } from "@/components/ui/blur-fade";
 import { AnimatedBackgroundVideo } from "@/components/motion/background-video";
 import { DrawLine } from "@/components/motion/draw-line";
 import { reveal } from "@/lib/motion";
+import { Chars, DropScope, countChars } from "@/components/motion/drop-text";
+
+const titleLead = "AI Gives Us Speed.";
+const titleAccent = "Human Expertise Gives It Purpose.";
 
 const pillars = [
   {
@@ -17,7 +21,7 @@ const pillars = [
   {
     n: "02",
     title: "Designed to Stand Apart",
-    body: "Your business deserves more than a generic template. We create thoughtful, bespoke digital experiences shaped around your brand, audience, and objectives.",
+    body: "Your business deserves more than a template or a generic AI-generated site. We create bespoke websites and products shaped around your brand, your audience and the action you want them to take.",
   },
   {
     n: "03",
@@ -94,11 +98,19 @@ export function ValueProposition() {
                   The Prolifi Difference
                 </p>
               </Reveal>
-              <Reveal inView variant="blur-up" delay={0.08}>
-                <h2 id="difference-title" className="mt-7 text-balance text-h2 font-semibold">
-                  AI Gives Us Speed. <span className="text-accent">Human Expertise Gives It Purpose.</span>
-                </h2>
-              </Reveal>
+              <DropScope
+                as="h2"
+                id="difference-title"
+                delay={0.08}
+                label={`${titleLead} ${titleAccent}`}
+                chars={countChars(titleLead, titleAccent)}
+                className="mt-7 block text-balance text-h2 font-semibold"
+              >
+                <Chars text={titleLead} />{" "}
+                <span className="text-accent">
+                  <Chars text={titleAccent} from={countChars(titleLead)} />
+                </span>
+              </DropScope>
               <Reveal inView delay={0.18}>
                 <p className="mt-7 text-pretty text-lead font-medium text-on-inverse">
                   The internet doesn&apos;t need more generic websites. It needs better digital experiences.

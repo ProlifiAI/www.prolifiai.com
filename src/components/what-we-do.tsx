@@ -17,6 +17,7 @@ import { Reveal } from "@/components/ui/blur-fade";
 import { BuildArt, LaunchArt, ScaleArt } from "@/components/stage-art";
 import { useStill } from "@/components/motion/use-still";
 import { AnimatedBackgroundVideo } from "@/components/motion/background-video";
+import { Chars, DropScope, countChars } from "@/components/motion/drop-text";
 
 /**
  * "What We Do": BUILD > LAUNCH > SCALE as a full-scale, scroll-driven stack.
@@ -229,12 +230,18 @@ export function WhatWeDo() {
         <Reveal inView>
           <p className="inline-flex rounded-full bg-accent/15 px-3 py-1.5 text-label font-semibold uppercase text-accent-strong">What we do</p>
         </Reveal>
-        <Reveal inView variant="blur-up" delay={0.08}>
-          <h2
-            id="what-we-do-title"
-            className="mt-6 text-[clamp(3.4rem,11vw,10.5rem)] font-semibold uppercase leading-[0.86] tracking-[-0.055em] text-heading"
-          >
-            <span className="block">Build,</span>
+        {/* Signature character drop, one wave across the three lines */}
+        <DropScope
+          as="h2"
+          id="what-we-do-title"
+          delay={0.05}
+          label="Build, Launch, Scale."
+          chars={countChars("Build,", "Launch,", "Scale.")}
+          className="mt-6 block text-[clamp(3.4rem,11vw,10.5rem)] font-semibold uppercase leading-[0.86] tracking-[-0.055em] text-heading"
+        >
+            <span className="block">
+              <Chars text="Build," />
+            </span>
             <span className="flex items-center gap-[0.18em]">
               {/* The supplied Build/Launch/Grow capsule clip, cropped to its gold-rimmed pill
                   (2.22:1), so the pill itself is the chip; its own gold rim replaces the ring */}
@@ -248,17 +255,19 @@ export function WhatWeDo() {
                   lazy
                 />
               </span>
-              Launch,
+              <Chars text="Launch," from={countChars("Build,")} />
             </span>
             <span className="block text-right">
-              Scale<span className="text-accent">.</span>
+              <Chars text="Scale" from={countChars("Build,", "Launch,")} />
+              <span className="text-accent">
+                <Chars text="." from={countChars("Build,", "Launch,", "Scale")} />
+              </span>
             </span>
-          </h2>
-        </Reveal>
+        </DropScope>
         <Reveal inView delay={0.16}>
           <p className="mt-8 max-w-[52ch] text-pretty text-lead text-ink-muted">
-            Three stages, one partner. Establish your digital foundation, bring your business to market, then expand
-            what it can do. Scroll through each stage.
+            Three stages, one partner. Get a website that wins customers, get found by the people looking for you,
+            then validate, build and automate what comes next. Scroll through each stage.
           </p>
         </Reveal>
       </div>

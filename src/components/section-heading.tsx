@@ -2,10 +2,12 @@ import type { ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/ui/blur-fade";
+import { DropText } from "@/components/motion/drop-text";
 
 /**
  * Standard section heading. Reveals in order: eyebrow, then the heading
- * (with a restrained blur-to-sharp), then the supporting copy.
+ * (the signature character drop for plain-text titles, a blur-to-sharp
+ * otherwise), then the supporting copy.
  * Eyebrows are rationed (roughly one per three sections).
  */
 export function SectionHeading({
@@ -40,11 +42,20 @@ export function SectionHeading({
           </p>
         </Reveal>
       )}
-      <Reveal inView variant="blur-up" delay={eyebrow ? 0.08 : 0}>
-        <Tag className={cn("text-balance text-h2 font-semibold", inverse ? "text-on-inverse" : "text-heading")}>
-          {title}
-        </Tag>
-      </Reveal>
+      {typeof title === "string" ? (
+        <DropText
+          as={Tag}
+          text={title}
+          delay={eyebrow ? 0.08 : 0}
+          className={cn("block text-balance text-h2 font-semibold", inverse ? "text-on-inverse" : "text-heading")}
+        />
+      ) : (
+        <Reveal inView variant="blur-up" delay={eyebrow ? 0.08 : 0}>
+          <Tag className={cn("text-balance text-h2 font-semibold", inverse ? "text-on-inverse" : "text-heading")}>
+            {title}
+          </Tag>
+        </Reveal>
+      )}
       {body && (
         <Reveal inView delay={eyebrow ? 0.18 : 0.1}>
           <p

@@ -135,19 +135,19 @@ export const values = [
 export const challenges = [
   {
     title: "Hard to find online",
-    body: "Customers search for you and find an outdated site, or nothing at all.",
+    body: "Customers search for what you do and find your competitors, an outdated site or nothing at all.",
   },
   {
     title: "Visitors do not convert",
-    body: "People land on your site but leave without calling, booking or buying.",
+    body: "People land on your site, but a template look and a vague message send them away without enquiring.",
   },
   {
-    title: "Social media without a plan",
-    body: "Posting takes time every week but does not bring in enquiries.",
+    title: "Too many AI tools, no plan",
+    body: "There is a new tool every week. You are not sure which ones fit your business or are worth paying for.",
   },
   {
-    title: "An idea without a product",
-    body: "You know what you want to build, but not how to shape it or where to start.",
+    title: "An idea you have not tested",
+    body: "You want to build an app or platform, but do not know yet whether customers will use it or pay for it.",
   },
 ] as const;
 
@@ -169,11 +169,23 @@ export type Faq = { q: string; a: string };
 export const generalFaqs: Faq[] = [
   {
     q: "What kind of businesses does Prolifi work with?",
-    a: "Small and growing businesses that want to build their digital presence, reach more customers or turn an idea into a digital product.",
+    a: "Small and growing businesses and founders across Australia and New Zealand: teams that need a website that wins customers, want to use AI properly, or are planning a digital product.",
   },
   {
     q: "Which service do I need?",
-    a: "If customers cannot find you or understand what you offer, start with Build. If you are introducing a business, offer or idea and need people to hear about it, look at Launch. If you are planning an app or platform, or need your product to do more, Scale is for you. Not sure? Tell us about your project and we will recommend a starting point.",
+    a: "If your website does not bring in enquiries, start with Build. If customers cannot find you on Google or social media, look at Launch. If you have an idea for an app or platform, or want AI to take on real work in your business, Scale covers idea validation, MVP and web app development, and AI tool selection and setup. Not sure? Tell us where you are stuck and we will recommend a starting point.",
+  },
+  {
+    q: "How is your website different from an AI-built or template site?",
+    a: "Every page is planned around your customers and the action you want them to take: clear messaging, fast pages and an easy path to enquire. A template or AI builder gives you a page. We build a site designed to win business.",
+  },
+  {
+    q: "Can you help us choose the right AI tools?",
+    a: "Yes. We start with the work you want to speed up, compare suitable tools against your budget and the systems you already use, then set up the ones worth keeping. If a tool is not worth paying for, we will tell you.",
+  },
+  {
+    q: "Can you tell us whether our idea is worth building?",
+    a: "We research the problem, who has it, how they solve it today and what already exists, then recommend whether to build, refine or rethink. Research reduces risk; it cannot guarantee success, and we will be honest about what the evidence shows.",
   },
   {
     q: "How does a project start?",
@@ -196,7 +208,7 @@ export const pricingFaqs: Faq[] = [
   },
   {
     q: "Are payments one-off or subscription-based?",
-    a: "Website packages are one-off payments. Social media and product work is quoted per project, depending on what you need.",
+    a: "Website packages are one-off payments. SEO, social media, MVP and AI work is quoted per project, depending on what you need.",
   },
   {
     q: "Can I start with Starter and add more later?",

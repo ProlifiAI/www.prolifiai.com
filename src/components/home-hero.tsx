@@ -10,6 +10,11 @@ import { pillars } from "@/content/services";
 import { ButtonLink } from "@/components/button";
 import { Reveal } from "@/components/ui/blur-fade";
 import { AnimatedBackgroundVideo } from "@/components/motion/background-video";
+import { Chars, DropScope, countChars } from "@/components/motion/drop-text";
+
+const heroLine1 = "Make the right digital call.";
+const heroLine2 = "Then build it to win";
+const heroAccent = "customers.";
 import { useStill } from "@/components/motion/use-still";
 
 /**
@@ -59,23 +64,36 @@ export function HomeHero() {
       >
         <Reveal>
           <p className="glass-surface inline-flex items-center gap-2 whitespace-nowrap rounded-full px-3.5 py-2 text-[0.66rem] font-semibold uppercase tracking-[0.1em] text-accent sm:px-4 sm:text-label">
-            Digital studio for growing businesses
+            Websites, MVPs &amp; AI · Australia &amp; NZ
           </p>
         </Reveal>
 
-        <Reveal variant="blur-up" delay={0.1} duration={0.8}>
-          <h1 id="hero-title" className="mx-auto mt-8 max-w-6xl text-balance text-display font-semibold lg:text-wrap">
-            <span className="lg:block">Build your digital presence.</span>{" "}
-            <span className="text-on-inverse/70 lg:block lg:whitespace-nowrap">
-              Unlock your next stage of <span className="text-accent">growth.</span>
+        {/* Signature character drop (after the brand intro when it plays) */}
+        <DropScope
+          as="h1"
+          id="hero-title"
+          mode="load"
+          intro
+          delay={0.12}
+          label={`${heroLine1} ${heroLine2} ${heroAccent}`}
+          chars={countChars(heroLine1, heroLine2, heroAccent)}
+          className="mx-auto mt-8 max-w-6xl text-balance text-display font-semibold lg:text-wrap"
+        >
+          <span className="lg:block">
+            <Chars text={heroLine1} />
+          </span>{" "}
+          <span className="text-on-inverse/70 lg:block lg:whitespace-nowrap">
+            <Chars text={heroLine2} from={countChars(heroLine1)} />{" "}
+            <span className="text-accent">
+              <Chars text={heroAccent} from={countChars(heroLine1, heroLine2)} />
             </span>
-          </h1>
-        </Reveal>
+          </span>
+        </DropScope>
 
         <Reveal delay={0.22}>
           <p className="mx-auto mt-7 max-w-[46ch] text-pretty text-lead text-on-inverse/80">
-            Prolifi helps ambitious businesses create better digital experiences, reach more customers, and turn ideas
-            into practical digital solutions.
+            We help Australian and New Zealand businesses pick the right AI tools, test ideas before investing, and
+            launch premium websites and products built to convert.
           </p>
         </Reveal>
 

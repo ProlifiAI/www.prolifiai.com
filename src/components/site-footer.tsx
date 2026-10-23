@@ -11,6 +11,7 @@ import { legalLine, nav, site, socials } from "@/content/site";
 import { pillars } from "@/content/services";
 import { Logo } from "@/components/logo";
 import { Reveal } from "@/components/ui/blur-fade";
+import { RollText } from "@/components/motion/drop-text";
 
 const socialIcons = {
   LinkedIn: LinkedinLogo,
@@ -59,8 +60,8 @@ export function SiteFooter() {
             <ul className="mt-5 space-y-3">
               {nav.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="text-on-inverse-muted transition-colors hover:text-on-inverse">
-                    {item.label}
+                  <Link href={item.href} className="roll-host text-on-inverse-muted transition-colors hover:text-on-inverse">
+                    <RollText text={item.label} />
                   </Link>
                 </li>
               ))}
@@ -71,8 +72,8 @@ export function SiteFooter() {
             <ul className="mt-5 space-y-3">
               {pillars.map((p) => (
                 <li key={p.id}>
-                  <Link href={`/services#${p.id}`} className="text-on-inverse-muted transition-colors hover:text-on-inverse">
-                    {p.name}
+                  <Link href={`/services#${p.id}`} className="roll-host text-on-inverse-muted transition-colors hover:text-on-inverse">
+                    <RollText text={p.name} />
                   </Link>
                 </li>
               ))}

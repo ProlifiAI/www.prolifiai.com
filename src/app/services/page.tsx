@@ -12,11 +12,12 @@ import { CtaBand, FaqSection, PageHero, ProcessSection } from "@/components/sect
 import { BlurFade } from "@/components/ui/blur-fade";
 import { MagicCard } from "@/components/ui/magic-card";
 import { ParallaxImage } from "@/components/motion/parallax";
+import { DropText } from "@/components/motion/drop-text";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Website Design, Social Media & UI/UX Services | Prolifi AI",
+  title: "Website Development, MVPs, SEO & AI Services | Prolifi AI",
   description:
-    "Build, Launch and Scale: business websites and landing pages, social media and launch campaigns, product strategy and UI/UX design from Prolifi AI.",
+    "Website design and development, SEO, idea validation, MVP and web app development, and AI tool selection and setup for businesses in Australia and New Zealand.",
   path: "/services",
 });
 
@@ -83,12 +84,13 @@ function PillarSection({ pillar, index }: { pillar: Pillar; index: number }) {
         <div className="grid items-end gap-10 lg:grid-cols-12">
           <BlurFade inView variant="slide-left" duration={0.75} className="lg:col-span-6">
             <p className="text-label font-semibold uppercase text-accent-strong">{pillar.focus}</p>
-            <h2
+            <DropText
+              as="h2"
               id={`${pillar.id}-title`}
-              className="mt-4 text-[clamp(3.5rem,9vw,7.5rem)] font-semibold uppercase leading-[0.9] tracking-[-0.045em] text-heading"
-            >
-              {pillar.name}
-            </h2>
+              text={pillar.name}
+              delay={0.1}
+              className="mt-4 block text-[clamp(3.5rem,9vw,7.5rem)] font-semibold uppercase leading-[0.9] tracking-[-0.045em] text-heading"
+            />
             <p className="mt-6 max-w-[30ch] text-balance text-h3 font-semibold text-heading">{pillar.message}</p>
             <p className="mt-4 max-w-[48ch] text-pretty text-lead text-ink-muted">{pillar.intro}</p>
             <div className="mt-8">
@@ -129,7 +131,7 @@ export default function ServicesPage() {
         video="services"
         eyebrow="Services"
         title="Build, launch and scale your business online"
-        intro="Establish your digital foundation, bring your business to market, then expand what it can do. Start with the stage that matches where you are today."
+        intro="Premium websites that win customers, SEO that helps them find you, and the research, MVP development and AI setup to grow from there. Start with the stage that matches where you are today."
       >
         <nav aria-label="Service pillars" className="flex flex-wrap gap-3">
           {pillars.map((p) => (

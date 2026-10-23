@@ -294,3 +294,150 @@
     background-image: var(--portrait-gradient);
   }
 }
+
+/* ------------------------------------------------------------------
+   Signature text motion (see src/components/motion/drop-text.tsx)
+   Modelled on the Ariyana Studio reference: each character sits in its
+   own clip and drops in from above with a back-in-out curve, so it dips,
+   falls, overshoots its baseline slightly and settles.
+
+   - Pure CSS: page-load drops run even before (or without) JavaScript.
+   - Scroll drops wait for [data-drop-in], which JavaScript adds once the
+     heading is visible. Characters are only hidden while `html.js` is set,
+     so nothing stays invisible if scripts fail.
+   - Only transform and opacity animate; the text keeps its exact layout.
+------------------------------------------------------------------- */
+:root {
+  /* GSAP back.inOut(1.7), as used by the reference */
+  --ease-drop: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --drop-duration: 0.75s;
+  /* How long page-load text waits for the brand intro; 0 when it is not shown */
+  --intro-offset: 0s;
+}
+html.intro-play {
+  --intro-offset: 0.8s;
+}
+
+.drop-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+.drop-clip {
+  display: inline-block;
+  /* Clips the character while it is above its slot; a little room on every
+     side so accents, descenders and overhangs are never cut */
+  clip-path: inset(-0.12em -0.15em -0.3em -0.15em);
+}
+.drop-char {
+  display: inline-block;
+}
+html.js .drop:not([data-drop-in]) .drop-char {
+  opacity: 0;
+  transform: translateY(-115%);
+}
+.drop[data-drop-in] .drop-char {
+  animation:
+    drop-y var(--drop-duration) var(--ease-drop) both,
+    drop-fade calc(var(--drop-duration) * 0.4) linear both;
+  animation-delay: calc(var(--drop-delay, 0s) + var(--i, 0) * var(--drop-step, 0.03s));
+}
+@keyframes drop-y {
+  from {
+    transform: translateY(-115%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes drop-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Hover roll for links: the label rolls up and an identical copy rolls in
+   from below, character by character (reference: data-link-text). */
+.roll {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  clip-path: inset(0 -0.15em);
+}
+.roll-layer {
+  display: inline-block;
+}
+.roll-layer + .roll-layer {
+  position: absolute;
+  inset: 100% 0 auto 0;
+}
+.roll-char {
+  display: inline-block;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--i, 0) * 0.016s);
+}
+@media (hover: hover) {
+  .roll-host:hover .roll-char {
+    transform: translateY(-100%);
+  }
+}
+.roll-host:focus-visible .roll-char {
+  transform: translateY(-100%);
+}
+
+/* Brand intro, first page of a session only (html.intro-play is set by the
+   inline script in layout.tsx before first paint) */
+.intro {
+  display: none;
+}
+html.intro-play .intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f6fb;
+  pointer-events: none;
+  animation: intro-out 0.55s cubic-bezier(0.65, 0, 0.35, 1) 0.75s forwards;
+}
+.intro-logo {
+  display: block;
+  clip-path: inset(-0.1em -0.1em -0.1em -0.1em);
+}
+.intro-logo > * {
+  display: block;
+  animation:
+    drop-y 0.65s var(--ease-drop) 0.05s both,
+    drop-fade 0.3s linear 0.05s both;
+}
+@keyframes intro-out {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+    visibility: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .drop:not([data-drop-in]) .drop-char,
+  .drop[data-drop-in] .drop-char {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .roll-char {
+    transition: none;
+  }
+  .roll-host:hover .roll-char,
+  .roll-host:focus-visible .roll-char {
+    transform: none;
+  }
+  html.intro-play .intro {
+    display: none;
+  }
+}

@@ -9,6 +9,6 @@ export default function OpenGraphImage() {
     eyebrow: "Services",
     line1: "Build. Launch. Scale.",
     line2: "Your business, online.",
-    footer: "Websites, social media campaigns, product strategy and UI/UX design",
+    footer: "Websites, SEO, idea validation, MVPs and AI setup",
   });
 }

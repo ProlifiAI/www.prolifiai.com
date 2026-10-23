@@ -3,6 +3,7 @@ import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import type { ComponentProps, ReactNode } from "react";
 
 import { hoverLabels } from "@/content/site";
+import { RollText } from "@/components/motion/drop-text";
 import { cn } from "@/lib/utils";
 
 type Variant = "primary" | "accent" | "outline" | "inverse" | "outline-inverse";
@@ -211,14 +212,15 @@ export function TextLink({
     <Link
       href={href}
       className={cn(
-        "group inline-flex items-center gap-1.5 bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-1 text-[0.95rem] font-medium transition-[background-size,color] duration-[var(--duration-button)] ease-[var(--ease-reveal)] hover:bg-[length:100%_1px]",
+        "roll-host group inline-flex items-center gap-1.5 bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-1 text-[0.95rem] font-medium transition-[background-size,color] duration-[var(--duration-button)] ease-[var(--ease-reveal)] hover:bg-[length:100%_1px]",
         tone === "default" ? "text-heading" : "text-on-inverse",
         "underline decoration-1 underline-offset-[6px] hover:no-underline",
         tone === "default" ? "decoration-line-strong" : "decoration-white/30",
         className
       )}
     >
-      {children}
+      {/* Plain-text labels roll letter by letter on hover */}
+      {typeof children === "string" ? <RollText text={children} /> : children}
       <ArrowRight
         size={14}
         weight="bold"

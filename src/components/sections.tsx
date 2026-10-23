@@ -13,6 +13,7 @@ import { GlassGradientBackground } from "@/components/motion/glass-gradient";
 import { BrandVideoBackground, type PageVideo } from "@/components/motion/brand-video-background";
 import { Parallax } from "@/components/motion/parallax";
 import { DrawLine } from "@/components/motion/draw-line";
+import { DropText } from "@/components/motion/drop-text";
 
 /* ------------------------------------------------------------------
    Page hero for inner pages: the page's own video under a navy gradient,
@@ -44,9 +45,13 @@ export function PageHero({
             {eyebrow}
           </p>
         </Reveal>
-        <Reveal variant="blur-up" delay={0.08}>
-          <h1 className="max-w-4xl text-balance text-h1 font-semibold">{title}</h1>
-        </Reveal>
+        {typeof title === "string" ? (
+          <DropText as="h1" text={title} mode="load" intro delay={0.08} className="block max-w-4xl text-balance text-h1 font-semibold" />
+        ) : (
+          <Reveal variant="blur-up" delay={0.08}>
+            <h1 className="max-w-4xl text-balance text-h1 font-semibold">{title}</h1>
+          </Reveal>
+        )}
         <Reveal delay={0.18}>
           <p className="mt-6 max-w-[56ch] text-pretty text-lead text-on-inverse-muted">{intro}</p>
         </Reveal>
@@ -137,8 +142,8 @@ export function FaqSection({ items, title = "Questions, answered" }: { items: Fa
    Final call to action. Yellow band, carried over and refined.
 ------------------------------------------------------------------- */
 export function CtaBand({
-  title = "Ready to grow your business?",
-  body = "Let's build something great together. No pressure, just a conversation.",
+  title = "Not sure what to build or fix first?",
+  body = "Tell us where you are stuck. We will recommend a starting point, then put the scope and price in writing.",
 }: {
   title?: string;
   body?: string;
@@ -154,9 +159,7 @@ export function CtaBand({
         />
         <div className="container-page flex flex-col items-start gap-8 py-16 md:flex-row md:items-end md:justify-between md:py-20">
           <div>
-            <Reveal inView variant="blur-up">
-              <h2 className="max-w-2xl text-balance text-h2 font-semibold text-heading">{title}</h2>
-            </Reveal>
+            <DropText as="h2" text={title} className="block max-w-2xl text-balance text-h2 font-semibold text-heading" />
             <Reveal inView delay={0.1}>
               <p className="mt-4 max-w-xl text-pretty text-lead text-heading/75">{body}</p>
             </Reveal>

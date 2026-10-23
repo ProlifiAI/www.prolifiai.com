@@ -13,9 +13,9 @@ import { CtaBand, FaqSection, PageHero } from "@/components/sections";
 import { BlurFade } from "@/components/ui/blur-fade";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Website Design Pricing | Prolifi AI",
+  title: "Website Development Cost & Packages | Prolifi AI",
   description:
-    "Website design packages at $450 and $900 (USD, one-off), or a custom quote for larger projects. Compare what each Prolifi AI package includes.",
+    "What does a website cost? Compare Prolifi AI's website packages ($450 and $900 USD, one-off) or get a custom quote for larger builds, MVPs and AI projects.",
   path: "/pricing",
 });
 
@@ -118,7 +118,7 @@ export default function PricingPage() {
         <div className="container-page">
           <SectionHeading
             tone="inverse"
-            title="Social media and product work, quoted to fit"
+            title="SEO, product and AI work, quoted to fit"
             body="These projects vary too much for fixed packages. Tell us what you need and we will send a clear quote."
           />
           <ul className="mt-14 grid gap-5 md:grid-cols-2">
