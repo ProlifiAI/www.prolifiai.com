@@ -16,6 +16,8 @@ export const pageVideos = {
   services: { src: "/video/services-hero.mp4", poster: "/video/services-hero-poster.jpg" },
   pricing: { src: "/video/pricing-hero.mp4", poster: "/video/pricing-hero-poster.jpg" },
   contact: { src: "/video/contact-hero.mp4", poster: "/video/contact-hero-poster.jpg" },
+  /** "Insight Page Hero Section.mp4": blog pages on laptops and tablets */
+  insights: { src: "/video/insights-hero.mp4", poster: "/video/insights-hero-poster.jpg" },
 } as const;
 
 export type PageVideo = keyof typeof pageVideos;

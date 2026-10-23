@@ -15,6 +15,8 @@ import { ArticleBody } from "@/components/insights/article-body";
 import { ArticleCard } from "@/components/insights/article-card";
 import { InsightCta } from "@/components/insights/insight-cta";
 import { ShareLinks } from "@/components/insights/share-links";
+import { AuthorCard } from "@/components/insights/author-card";
+import { authorByName } from "@/content/insights/authors";
 
 export const dynamicParams = false;
 
@@ -35,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     ...base,
     keywords: article.keywords,
-    authors: [{ name: article.author?.name ?? site.name }],
+    authors: [{ name: article.author ?? site.name }],
     openGraph: {
       ...base.openGraph,
       type: "article",
@@ -54,6 +56,7 @@ export default async function ArticlePage({ params }: Props) {
   const toc = tableOfContents(article);
   const related = relatedArticles(article);
   const url = `${siteUrl}/insights/${article.slug}`;
+  const author = authorByName(article.author);
 
   return (
     <>
@@ -66,7 +69,7 @@ export default async function ArticlePage({ params }: Props) {
           updated: article.updated,
           section: category.name,
           keywords: article.keywords,
-          author: article.author,
+          author: author && { name: author.name, jobTitle: author.role, profile: author.profile, photo: author.photo, sameAs: author.sameAs },
         })}
       />
       <JsonLd
@@ -101,7 +104,17 @@ export default async function ArticlePage({ params }: Props) {
             <Reveal delay={0.15}>
               <p className="mt-6 max-w-[62ch] text-pretty text-lead text-ink-muted">{article.standfirst}</p>
               <p className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-ink-muted">
-                <span className="font-medium text-heading">{article.author?.name ?? site.name}</span>
+                {author ? (
+                  <span>
+                    By{" "}
+                    <Link href={author.profile} rel="author" className="font-medium text-heading underline decoration-line-strong underline-offset-4 hover:decoration-heading">
+                      {author.name}
+                    </Link>
+                    , {author.role}
+                  </span>
+                ) : (
+                  <span className="font-medium text-heading">{site.name}</span>
+                )}
                 <span aria-hidden>·</span>
                 <span>
                   Published <time dateTime={article.published}>{formatDate(article.published)}</time>
@@ -157,7 +170,13 @@ export default async function ArticlePage({ params }: Props) {
                 </Link>
               </div>
 
-              <div className="mt-12">
+              {author && (
+                <div className="mt-12">
+                  <AuthorCard author={author} />
+                </div>
+              )}
+
+              <div className="mt-8">
                 <InsightCta category={category} />
               </div>
             </div>

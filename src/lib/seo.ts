@@ -89,7 +89,7 @@ export function articleJsonLd(a: {
   updated?: string;
   section: string;
   keywords: string[];
-  author?: { name: string; url?: string };
+  author?: { name: string; jobTitle: string; profile: string; photo: string; sameAs: string[] };
 }) {
   const url = `${siteUrl}/insights/${a.slug}`;
   return {
@@ -106,7 +106,15 @@ export function articleJsonLd(a: {
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
     url,
     author: a.author
-      ? { "@type": "Person", name: a.author.name, ...(a.author.url ? { url: a.author.url } : {}) }
+      ? {
+          "@type": "Person",
+          name: a.author.name,
+          jobTitle: a.author.jobTitle,
+          url: `${siteUrl}${a.author.profile}`,
+          image: `${siteUrl}${a.author.photo}`,
+          sameAs: a.author.sameAs,
+          worksFor: { "@type": "Organization", "@id": `${siteUrl}/#organization`, name: site.name },
+        }
       : { "@type": "Organization", name: site.name, url: `${siteUrl}/` },
     publisher: {
       "@type": "Organization",

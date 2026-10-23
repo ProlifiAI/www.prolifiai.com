@@ -25,6 +25,7 @@ export default function InsightsPage() {
     <>
       <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Insights", path: "/insights" }])} />
       <PageHero
+        video="insights"
         eyebrow="Prolifi Insights"
         title="Insights for better digital decisions"
         intro="Practical, honest advice on websites, AI, design and product ideas. Written to help you understand the problem, make a better decision and take the right next step."

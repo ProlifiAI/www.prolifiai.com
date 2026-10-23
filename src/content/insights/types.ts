@@ -53,8 +53,11 @@ export type Article = {
   /** ISO dates. Only real publication and update dates. */
   published: string;
   updated?: string;
-  /** Verified author only; defaults to the Prolifi AI organisation */
-  author?: { name: string; url?: string };
+  /**
+   * Author, by name from the team in src/content/company.ts (verified people
+   * only). Omit to credit the Prolifi AI organisation.
+   */
+  author?: string;
   /** The primary search topic and supporting terms (from docs/content/editorial-plan.md) */
   keywords: string[];
   featured?: boolean;

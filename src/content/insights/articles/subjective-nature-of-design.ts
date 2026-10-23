@@ -19,6 +19,8 @@ export const subjectiveNatureOfDesign: Article = {
     "Design lives somewhere between personal taste and measurable results. If you understand where that line sits, rejection gets easier to read, feedback gets easier to use, and your confidence gets harder to knock over.",
   category: "design",
   published: "2026-10-23",
+  // Confirmed by Prolifi, 2026-10-23
+  author: "Paul Stephen",
   keywords: [
     "is design subjective",
     "design is subjective or objective",
@@ -45,7 +47,7 @@ export const subjectiveNatureOfDesign: Article = {
     },
     {
       type: "p",
-      text: "Familiarity plays a large part too. Psychologists have long studied the *mere-exposure effect*: people tend to rate things more favourably simply because they have seen them before [1]. In design reviews this shows up constantly. The existing website feels \"right\" partly because everyone has looked at it every day for years. A new direction, however well reasoned, starts at a disadvantage because it is unfamiliar.",
+      text: "Familiarity plays a large part too. Psychologists have long studied the [mere-exposure effect](https://en.wikipedia.org/wiki/Mere-exposure_effect): people tend to rate things more favourably simply because they have seen them before [1]. In design reviews this shows up constantly. The existing website feels \"right\" partly because everyone has looked at it every day for years. A new direction, however well reasoned, starts at a disadvantage because it is unfamiliar.",
     },
     {
       type: "p",
@@ -65,11 +67,11 @@ export const subjectiveNatureOfDesign: Article = {
       type: "callout",
       title: "What can be evaluated, not just debated",
       items: [
-        "**Usability**: can people find what they need and complete the task? You can watch them try.",
-        "**Accessibility**: does text meet contrast requirements? WCAG sets a minimum contrast ratio of 4.5:1 for normal-sized body text [2]. That is a number, not an opinion.",
+        "**Usability**: can people find what they need and complete the task? You can watch them try: that is exactly what [usability testing](https://www.nngroup.com/articles/usability-testing-101/) is for.",
+        "**Accessibility**: does text meet contrast requirements? [WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/) sets a minimum contrast ratio of 4.5:1 for normal-sized body text [2]. That is a number, not an opinion.",
         "**Readability**: line length, type size, spacing and hierarchy all have well-established effects on how easily people read.",
-        "**Consistency**: do similar things look and behave the same way throughout? Established usability heuristics treat this as a core principle [3].",
-        "**Business objectives**: does the design make the action the business needs, such as an enquiry, a booking or a sign-up, obvious and easy?",
+        "**Consistency**: do similar things look and behave the same way throughout? [Established usability heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/) treat this as a core principle [3].",
+        "**Business objectives**: does the design make the action the business needs, such as an enquiry, a booking or a sign-up, obvious and easy? This is the core of a [conversion-focused website](/services#build).",
       ],
     },
     {
@@ -93,7 +95,7 @@ export const subjectiveNatureOfDesign: Article = {
         "**Seniority stands in for evidence.** Some teams call this the HiPPO problem: the Highest Paid Person's Opinion. It is not malicious. It is simply easier for a group to defer than to debate.",
         "**Risk feels bigger than reward.** A bold change is visible if it fails. Keeping things as they are rarely gets anyone in trouble, so unfamiliar work faces a higher bar.",
         "**People arrive late.** Someone who missed the research, the brief and the early rounds sees only the final design, without the reasoning behind it.",
-        "**Committees average things out.** When everyone's preferences must be accommodated, distinctive decisions get sanded down until the work offends nobody and persuades nobody.",
+        "**Committees average things out.** Often called [design by committee](https://en.wikipedia.org/wiki/Design_by_committee): when everyone's preferences must be accommodated, distinctive decisions get sanded down until the work offends nobody and persuades nobody.",
       ],
     },
     {
@@ -157,7 +159,7 @@ export const subjectiveNatureOfDesign: Article = {
         "**Start with the goal, not the design.** Remind everyone what the work is meant to achieve and for whom, before anyone sees a screen.",
         "**Show the decisions, not just the result.** Explain why the main action sits where it does, why the navigation is structured this way, why this contrast level was chosen.",
         "**Show what you considered and rejected.** It demonstrates rigour and answers \"what if we tried...\" before it is asked.",
-        "**Bring evidence where you have it.** Usability test observations, accessibility checks, analytics from the current site and research findings carry more weight than conviction.",
+        "**Bring evidence where you have it.** Usability test observations from [UX research](/services#scale), accessibility checks, analytics from the current site and research findings carry more weight than conviction.",
         "**Separate the testable from the taste.** Be clear which decisions are grounded in evidence and which are judgement calls. People trust the second kind more when you are honest about it.",
       ],
     },
@@ -173,7 +175,7 @@ export const subjectiveNatureOfDesign: Article = {
     },
     {
       type: "p",
-      text: "If repeated criticism has you quietly convinced that everyone else knows what they are doing and you are about to be found out, you are in large company. The *imposter phenomenon* was described by psychologists Pauline Clance and Suzanne Imes in 1978 [4], and it has been widely discussed in creative and professional fields since. It tends to affect capable people, which is part of what makes it so persistent.",
+      text: "If repeated criticism has you quietly convinced that everyone else knows what they are doing and you are about to be found out, you are in large company. The [imposter phenomenon](https://en.wikipedia.org/wiki/Impostor_syndrome) was described by psychologists Pauline Clance and Suzanne Imes in 1978 [4], and it has been widely discussed in creative and professional fields since. It tends to affect capable people, which is part of what makes it so persistent.",
     },
     { type: "p", text: "A few things genuinely help:" },
     {
@@ -211,6 +213,10 @@ export const subjectiveNatureOfDesign: Article = {
     {
       type: "p",
       text: "Design is subjective in the way it is *felt*, and far less subjective in the way it *works*. The skill is knowing which part of a conversation you are in. Treat taste with respect, treat evidence as decisive, and make your reasoning visible. Do that consistently and fewer good ideas get rejected for bad reasons, and the ones that do will not shake your confidence quite so much.",
+    },
+    {
+      type: "p",
+      text: "If you are weighing a design decision for your own business, our [UI/UX design](/services#scale) and [website](/services#build) work is built around making that reasoning visible. And for more practical thinking on websites, AI and product decisions, browse [Prolifi Insights](/insights).",
     },
     {
       type: "sources",
