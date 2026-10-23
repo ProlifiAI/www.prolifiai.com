@@ -62,3 +62,57 @@ export function siteJsonLd(sameAs: string[]) {
   };
   return { "@context": "https://schema.org", "@graph": [org, website] };
 }
+
+/** BreadcrumbList structured data, from root to the current page */
+export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      item: `${siteUrl}${item.path}`,
+    })),
+  };
+}
+
+/**
+ * BlogPosting structured data. Author is the Prolifi AI organisation unless an
+ * article names a verified person. No ratings or invented fields.
+ */
+export function articleJsonLd(a: {
+  slug: string;
+  title: string;
+  description: string;
+  published: string;
+  updated?: string;
+  section: string;
+  keywords: string[];
+  author?: { name: string; url?: string };
+}) {
+  const url = `${siteUrl}/insights/${a.slug}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: a.title,
+    description: a.description,
+    image: `${url}/opengraph-image`,
+    datePublished: a.published,
+    dateModified: a.updated ?? a.published,
+    articleSection: a.section,
+    keywords: a.keywords.join(", "),
+    inLanguage: "en-AU",
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    url,
+    author: a.author
+      ? { "@type": "Person", name: a.author.name, ...(a.author.url ? { url: a.author.url } : {}) }
+      : { "@type": "Organization", name: site.name, url: `${siteUrl}/` },
+    publisher: {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      name: site.name,
+      logo: { "@type": "ImageObject", url: `${siteUrl}/brand/prolifi-logo.png` },
+    },
+  };
+}
