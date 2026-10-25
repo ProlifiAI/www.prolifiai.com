@@ -83,11 +83,12 @@ export function ValueProposition() {
   return (
     <section aria-labelledby="difference-title" className="px-3 py-3 md:px-4 md:py-4">
       <div className="relative isolate overflow-hidden rounded-[2rem] text-on-inverse">
-        {/* Background: the supplied AI/Human Integration gradient-motion clip (slow navy fluid).
+        {/* Background: the supplied AI/Human Integration gradient-motion clip, slowed to 75% in Canva
+            and blended end-to-start so it loops without a jump.
             Fills the panel (object-cover), lazy-loaded, poster for reduced motion and data saver.
             A light navy wash, slightly deeper behind the copy on the left, keeps the text readable. */}
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden bg-inverse">
-          <AnimatedBackgroundVideo src="/video/ai-human-gradient.mp4" poster="/video/ai-human-gradient-poster.jpg" lazy />
+          <AnimatedBackgroundVideo src="/video/ai-human-gradient-slow.mp4" poster="/video/ai-human-gradient-slow-poster.jpg" lazy />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(8_29_61/0.55)_0%,rgb(8_29_61/0.35)_50%,rgb(8_29_61/0.2)_100%)] max-lg:bg-[linear-gradient(180deg,rgb(8_29_61/0.5)_0%,rgb(8_29_61/0.4)_55%,rgb(8_29_61/0.5)_100%)]" />
         </div>
         <div className="container-page py-20 md:py-28">
