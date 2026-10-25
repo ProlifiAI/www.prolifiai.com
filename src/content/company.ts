@@ -203,7 +203,7 @@ export const generalFaqs: Faq[] = [
 
 export const pricingFaqs: Faq[] = [
   {
-    q: "What does the Starter package include?",
+    q: "What does the Standard package include?",
     a: "A responsive website designed and developed for your business, an SEO-ready structure and one round of revisions.",
   },
   {
@@ -211,7 +211,7 @@ export const pricingFaqs: Faq[] = [
     a: "Website packages are one-off payments. SEO, social media, MVP and AI work is quoted per project, depending on what you need.",
   },
   {
-    q: "Can I start with Starter and add more later?",
+    q: "Can I start with Standard and add more later?",
     a: "Yes. Many businesses start small. Tell us what you would like to add and we will quote the additional work.",
   },
   {
@@ -220,7 +220,7 @@ export const pricingFaqs: Faq[] = [
   },
   {
     q: "What if my project does not fit a package?",
-    a: "Choose Custom or send us a project enquiry. We will scope the work and send a quote.",
+    a: "Choose Enterprise or send us a project enquiry. We will scope the work and send a quote.",
   },
 ];
 

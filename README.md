@@ -83,7 +83,7 @@ These items are deliberately hidden or worded conservatively until someone at Pr
   have `verified: false`. They show in local development with a "Needs confirmation" tag and are left out of
   production builds. Set `verified: true` once confirmed (and use only one of 4.5/5 or 95%).
 
-- **Prices**: Starter $450, Professional $900, Custom "Contact us", all USD, set by Prolifi in October 2026.
+- **Prices**: Standard $450, Professional $900, Enterprise "Contact us", all USD, set by Prolifi in October 2026.
   Inclusions were lightly reworded from the old design: "SLA-backed delivery timelines" became
   "Agreed delivery timelines", "white-labelling" and "Complete digital transformation solution" were dropped.
 - **Not carried over**: "Money-back guarantee", "30-day free trial", "Upgrade or cancel anytime", the ".65" cents.

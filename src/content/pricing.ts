@@ -2,8 +2,8 @@
  * Pricing. Edit packages here; the home page preview, the pricing page and
  * the comparison table all read from this file.
  *
- * Prices in US dollars, as set by Prolifi (October 2026): Starter $450,
- * Professional $900, Custom "Contact us". All one-off payments. Package names,
+ * Prices in US dollars, as set by Prolifi (October 2026): Standard $450,
+ * Professional $900, Enterprise "Contact us" (renamed from Starter and Custom, 2026-10-25). All one-off payments. Package names,
  * inclusions and the comparison mapping are unchanged from the original design.
  *
  * NOT carried over from the old design, because they could not be verified:
@@ -33,8 +33,8 @@ export type Package = {
 
 export const websitePackages: Package[] = [
   {
-    id: "starter",
-    name: "Starter",
+    id: "standard",
+    name: "Standard",
     price: 450,
     billing: "One-off payment",
     summary: "For small businesses starting their digital journey.",
@@ -43,7 +43,7 @@ export const websitePackages: Package[] = [
       "SEO-ready site structure",
       "1 round of revisions",
     ],
-    cta: "Start with Starter",
+    cta: "Start with Standard",
   },
   {
     id: "professional",
@@ -52,7 +52,7 @@ export const websitePackages: Package[] = [
     billing: "One-off payment",
     summary: "For growing businesses ready to stand out from competitors.",
     features: [
-      "Everything in Starter",
+      "Everything in Standard",
       "Custom branding and UI design system",
       "Social media integration and strategy",
       "3 rounds of revisions",
@@ -63,8 +63,8 @@ export const websitePackages: Package[] = [
     cta: "Choose Professional",
   },
   {
-    id: "custom",
-    name: "Custom",
+    id: "enterprise",
+    name: "Enterprise",
     price: null,
     billing: "Quoted per project",
     summary: "For organisations with complex, multi-channel needs.",
@@ -82,15 +82,15 @@ export const websitePackages: Package[] = [
 
 /** Rows for the comparison table. true = included, false = not included. */
 export const comparison: { feature: string; values: Record<string, boolean | string> }[] = [
-  { feature: "Responsive website", values: { starter: true, professional: true, custom: true } },
-  { feature: "SEO-ready structure", values: { starter: true, professional: true, custom: true } },
-  { feature: "Rounds of revisions", values: { starter: "1", professional: "3", custom: "Unlimited" } },
-  { feature: "Custom branding and UI system", values: { starter: false, professional: true, custom: true } },
-  { feature: "Social media integration", values: { starter: false, professional: true, custom: true } },
-  { feature: "Priority support", values: { starter: false, professional: true, custom: true } },
-  { feature: "Analytics dashboard", values: { starter: false, professional: true, custom: true } },
-  { feature: "Dedicated account manager", values: { starter: false, professional: false, custom: true } },
-  { feature: "Bespoke features and reporting", values: { starter: false, professional: false, custom: true } },
+  { feature: "Responsive website", values: { standard: true, professional: true, enterprise: true } },
+  { feature: "SEO-ready structure", values: { standard: true, professional: true, enterprise: true } },
+  { feature: "Rounds of revisions", values: { standard: "1", professional: "3", enterprise: "Unlimited" } },
+  { feature: "Custom branding and UI system", values: { standard: false, professional: true, enterprise: true } },
+  { feature: "Social media integration", values: { standard: false, professional: true, enterprise: true } },
+  { feature: "Priority support", values: { standard: false, professional: true, enterprise: true } },
+  { feature: "Analytics dashboard", values: { standard: false, professional: true, enterprise: true } },
+  { feature: "Dedicated account manager", values: { standard: false, professional: false, enterprise: true } },
+  { feature: "Bespoke features and reporting", values: { standard: false, professional: false, enterprise: true } },
 ];
 
 /**

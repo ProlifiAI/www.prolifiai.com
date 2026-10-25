@@ -8,7 +8,7 @@ export default function OpenGraphImage() {
   return renderOgImage({
     eyebrow: "Pricing",
     line1: "Simple, honest pricing.",
-    line2: "$450 · $900 · Custom.",
+    line2: "$450 · $900 · Enterprise.",
     footer: "One-off website packages in US dollars",
   });
 }
