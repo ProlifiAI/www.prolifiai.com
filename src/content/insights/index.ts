@@ -1,6 +1,8 @@
 import type { Article, Block, CategoryId } from "@/content/insights/types";
 import { categories, categoryById } from "@/content/insights/categories";
 import { subjectiveNatureOfDesign } from "@/content/insights/articles/subjective-nature-of-design";
+import { websiteCostAustralia } from "@/content/insights/articles/website-cost-australia";
+import { doTradiesNeedAWebsite } from "@/content/insights/articles/do-tradies-need-a-website";
 
 /**
  * Prolifi Insights registry. To publish an article:
@@ -9,7 +11,7 @@ import { subjectiveNatureOfDesign } from "@/content/insights/articles/subjective
  * Listings, category pages, related articles, the sitemap and structured data
  * all update automatically.
  */
-const all: Article[] = [subjectiveNatureOfDesign];
+const all: Article[] = [subjectiveNatureOfDesign, websiteCostAustralia, doTradiesNeedAWebsite];
 
 export { categories, categoryById };
 export type { Article, Block, CategoryId };
