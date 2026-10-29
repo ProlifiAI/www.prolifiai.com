@@ -66,7 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div aria-hidden className="intro">
           <span className="intro-logo">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/prolifi-logo.png" alt="" width={1664} height={288} className="h-10 w-auto md:h-14" />
+            <img src="/brand/prolifi-logo.png" alt="" width={1470} height={261} className="h-10 w-auto md:h-14" />
           </span>
         </div>
         {/* Entrance animations start at opacity 0; keep content visible without JavaScript */}

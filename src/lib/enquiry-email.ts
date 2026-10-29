@@ -183,7 +183,7 @@ export function buildEnquiryEmail(input: EnquiryEmailInput): EnquiryEmail {
 
 <!-- Header -->
 <tr><td class="px" bgcolor="${c.navy}" style="background-color:${c.navy};padding:28px 40px 30px 40px;border-bottom:3px solid ${c.yellow};">
-<img src="${escapeHtml(siteUrl)}/brand/prolifi-logo-white.png" width="128" height="22" alt="PROLIFI" style="display:block;border:0;outline:none;width:128px;height:auto;font-family:${font};font-size:20px;font-weight:700;letter-spacing:4px;color:${c.white};">
+<img src="${escapeHtml(siteUrl)}/brand/prolifi-logo-white.png" width="128" height="24" alt="PROLIFI" style="display:block;border:0;outline:none;width:128px;height:auto;font-family:${font};font-size:20px;font-weight:700;letter-spacing:4px;color:${c.white};">
 <div style="margin-top:22px;font-family:${font};font-size:12px;line-height:16px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:${c.yellow};">New project enquiry</div>
 <div style="margin-top:6px;font-family:${font};font-size:15px;line-height:22px;color:#C9D3E6;">You&#39;ve received a new enquiry through the Prolifi website.</div>
 </td></tr>

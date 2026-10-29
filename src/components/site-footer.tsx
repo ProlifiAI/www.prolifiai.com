@@ -107,8 +107,8 @@ export function SiteFooter() {
         <Image
           src="/brand/prolifi-logo-white.png"
           alt=""
-          width={1664}
-          height={288}
+          width={1678}
+          height={313}
           sizes="100vw"
           className="h-auto w-full translate-y-[22%] opacity-[0.06] grayscale"
         />

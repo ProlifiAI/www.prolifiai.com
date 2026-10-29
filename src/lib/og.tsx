@@ -36,7 +36,7 @@ export async function renderOgImage({
       >
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={logoSrc} width={347} height={60} alt="Prolifi" />
+          <img src={logoSrc} width={322} height={60} alt="Prolifi" />
           {eyebrow && (
             <span
               style={{

@@ -94,7 +94,7 @@ These items are deliberately hidden or worded conservatively until someone at Pr
 - **Process and expectations copy** (written proposal before work starts, review points, handover): confirm it
   matches how the team works.
 - **Social links, contact email, company registration line**: empty, so nothing renders. Add real values.
-- **Logo**: the official logo is in `public/brand` (transparent PNGs cut from the supplied 2000 px artwork; favicon in
+- **Logo**: the official logos are in `public/brand`: `prolifi-logo.png` (navy and yellow, header) and `prolifi-logo-white.png` (footer), transparent PNGs cut from the artwork supplied on 2026-10-29 (favicon in
   `src/app/icon.png`). If you have an SVG version, it would be sharper still.
 - **Team photos**: Damilola's and Deborah's photos are only 360 px and 299 px wide and look soft on large screens.
   Replace them with higher-resolution versions using the same filenames.
