@@ -64,7 +64,7 @@ export function HomeHero() {
       >
         <Reveal>
           <p className="glass-surface inline-flex items-center gap-2 whitespace-nowrap rounded-full px-3.5 py-2 text-[0.66rem] font-semibold uppercase tracking-[0.1em] text-accent sm:px-4 sm:text-label">
-            Websites, MVPs &amp; AI · Australia &amp; NZ
+            Web Design &amp; Development · Worldwide
           </p>
         </Reveal>
 
@@ -92,7 +92,7 @@ export function HomeHero() {
 
         <Reveal delay={0.22}>
           <p className="mx-auto mt-7 max-w-[46ch] text-pretty text-lead text-on-inverse/80">
-            We help Australian and New Zealand businesses pick the right AI tools, test ideas before investing, and
+            We help businesses around the world pick the right AI tools, test ideas before investing, and
             launch premium websites and products built to convert.
           </p>
         </Reveal>

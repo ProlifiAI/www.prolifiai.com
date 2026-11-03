@@ -16,7 +16,7 @@ import { GlassGradientBackground } from "@/components/motion/glass-gradient";
 export const metadata: Metadata = pageMetadata({
   title: "About Prolifi AI | Strategy, Design & Development Team",
   description:
-    "Meet the team behind Prolifi AI: strategy, design and development for Australian and New Zealand businesses, from premium websites to MVPs and AI setup.",
+    "Meet the team behind Prolifi AI: strategy, web design and development for businesses worldwide, from premium websites to MVPs and AI setup.",
   path: "/about",
 });
 
@@ -42,7 +42,7 @@ export default function AboutPage() {
         video="about"
         eyebrow="About Prolifi"
         title="A digital studio for businesses ready to grow"
-        intro="We help businesses across Australia and New Zealand decide what is worth building, then build it properly: websites that win customers, products worth launching and AI that does useful work."
+        intro="We help businesses around the world decide what is worth building, then build it properly: websites that win customers, products worth launching and AI that does useful work."
       />
 
       {/* Why Prolifi exists */}

@@ -13,7 +13,7 @@ import { BrandVideoBackground } from "@/components/motion/brand-video-background
 export const metadata: Metadata = pageMetadata({
   title: "Contact Prolifi AI | Start Your Website, MVP or AI Project",
   description:
-    "Tell us about your website, product idea or AI project. Prolifi AI works with businesses across Australia and New Zealand and replies by email.",
+    "Tell us about your website, product idea or AI project. Prolifi AI works with businesses worldwide and replies by email.",
   path: "/contact",
 });
 

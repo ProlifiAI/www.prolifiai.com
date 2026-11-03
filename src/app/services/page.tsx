@@ -17,7 +17,7 @@ import { DropText } from "@/components/motion/drop-text";
 export const metadata: Metadata = pageMetadata({
   title: "Website Development, MVPs, SEO & AI Services | Prolifi AI",
   description:
-    "Website design and development, SEO, idea validation, MVP and web app development, and AI tool selection and setup for businesses in Australia and New Zealand.",
+    "Website design and development, SEO, idea validation, MVP and web app development, and AI tool selection and setup for businesses worldwide.",
   path: "/services",
 });
 

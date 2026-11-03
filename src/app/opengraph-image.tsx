@@ -9,6 +9,6 @@ export default function OpenGraphImage() {
   return renderOgImage({
     line1: "Make the right digital call.",
     line2: "Then build it to win customers.",
-    footer: "Websites, MVPs and AI for Australian and New Zealand businesses",
+    footer: "Web design, development, MVPs and AI for businesses worldwide",
   });
 }

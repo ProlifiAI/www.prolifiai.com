@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: site.title,
     description: site.description,
     url: "/",
-    locale: "en_AU",
+    locale: "en_US",
   },
   twitter: { card: "summary_large_image", title: site.title, description: site.description },
   // Google Search Console HTML-tag verification, only when a real token is configured
@@ -52,7 +52,7 @@ const bootScript = `(function(){var d=document.documentElement;d.classList.add("
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
-      lang="en-AU"
+      lang="en"
       className={`${GeistSans.variable} ${GeistMono.variable}`}
       // The boot script adds classes before React hydrates
       suppressHydrationWarning

@@ -169,7 +169,7 @@ export type Faq = { q: string; a: string };
 export const generalFaqs: Faq[] = [
   {
     q: "What kind of businesses does Prolifi work with?",
-    a: "Small and growing businesses and founders across Australia and New Zealand: teams that need a website that wins customers, want to use AI properly, or are planning a digital product.",
+    a: "Small and growing businesses and founders around the world, from Canada, the United States and the United Kingdom to Europe, Asia and Australia: teams that need a website that wins customers, want to use AI properly, or are planning a digital product.",
   },
   {
     q: "Which service do I need?",

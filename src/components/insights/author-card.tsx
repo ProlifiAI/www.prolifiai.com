@@ -19,8 +19,8 @@ export function AuthorCard({ author }: { author: Author }) {
         </h2>
         <p className="text-sm text-ink-muted">{author.role}, Prolifi AI</p>
         <p className="mt-3 text-pretty text-[0.95rem] text-ink">
-          {author.name} is {author.role} at Prolifi AI, a strategy, design and development studio working with businesses
-          across Australia and New Zealand.
+          {author.name} is {author.role} at Prolifi AI, a strategy, web design and development studio working with businesses
+          around the world.
         </p>
         {linkedin && (
           <a

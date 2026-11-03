@@ -60,7 +60,7 @@ export const pillars: Pillar[] = [
         slug: "business-websites",
         name: "Business websites",
         problem: "You have no website, or a template site that looks like everyone else's and does not bring in enquiries.",
-        forWho: "Small and growing businesses across Australia and New Zealand.",
+        forWho: "Small and growing businesses, wherever they are based.",
         deliverables: [
           "Customer and message planning",
           "Conversion-focused page structure",

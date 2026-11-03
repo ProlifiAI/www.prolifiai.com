@@ -26,7 +26,7 @@ export function pageMetadata({
     openGraph: {
       type: "website",
       siteName: site.name,
-      locale: "en_AU",
+      locale: "en_US",
       title,
       description,
       url: path,
@@ -57,7 +57,7 @@ export function siteJsonLd(sameAs: string[]) {
     "@id": `${siteUrl}/#website`,
     name: site.name,
     url: `${siteUrl}/`,
-    inLanguage: "en-AU",
+    inLanguage: "en",
     publisher: { "@id": `${siteUrl}/#organization` },
   };
   return { "@context": "https://schema.org", "@graph": [org, website] };
@@ -102,7 +102,7 @@ export function articleJsonLd(a: {
     dateModified: a.updated ?? a.published,
     articleSection: a.section,
     keywords: a.keywords.join(", "),
-    inLanguage: "en-AU",
+    inLanguage: "en",
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
     url,
     author: a.author

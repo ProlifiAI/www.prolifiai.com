@@ -53,7 +53,7 @@ export function Proposition() {
       <div className="container-page">
         <Reveal inView variant="blur-up" duration={0.8}>
           <p className="max-w-5xl text-balance text-[clamp(1.6rem,3vw,2.6rem)] font-medium leading-[1.2] tracking-[-0.03em] text-heading">
-            Prolifi AI is a strategy, design and development studio for Australian and New Zealand businesses.{" "}
+            Prolifi AI is a strategy, web design and development studio for businesses worldwide.{" "}
             <span className="text-ink-muted">
               We help you decide what is worth doing, then build it properly, so customers can find you, trust you and
               buy from you.
