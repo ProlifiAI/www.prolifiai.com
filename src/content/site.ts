@@ -64,7 +64,7 @@ export const hoverLabels: Record<string, string> = {
   "Request a Quote": "Tell Us What You Need",
   "Back to Home": "Go Home",
   "Start with Standard": "Choose Standard",
-  "Choose Professional": "Go Professional",
+  "Choose Premium": "Go Premium",
   "Contact Us": "Let's Talk",
   "Send Message": "Send to Prolifi",
 };

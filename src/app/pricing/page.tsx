@@ -15,7 +15,7 @@ import { BlurFade } from "@/components/ui/blur-fade";
 export const metadata: Metadata = pageMetadata({
   title: "Website Development Cost & Packages | Prolifi AI",
   description:
-    "What does a website cost? Compare Prolifi AI's website packages ($450 and $900 USD, one-off) or get a custom quote for larger builds, MVPs and AI projects.",
+    "What does a website cost? Compare Prolifi AI's website packages ($500 and $1,200 USD, one-off) or get a custom quote for larger builds, MVPs and AI projects.",
   path: "/pricing",
 });
 

@@ -2,9 +2,10 @@
  * Pricing. Edit packages here; the home page preview, the pricing page and
  * the comparison table all read from this file.
  *
- * Prices in US dollars, as set by Prolifi (October 2026): Standard $450,
- * Professional $900, Enterprise "Contact us" (renamed from Starter and Custom, 2026-10-25). All one-off payments. Package names,
- * inclusions and the comparison mapping are unchanged from the original design.
+ * Prices in US dollars, as set by Prolifi: Standard $500, Premium $1,200,
+ * Enterprise "Contact us" (renamed from Starter and Custom, 2026-10-25; Professional renamed
+ * Premium and prices raised from $450 and $900, 2026-11-05). All one-off payments. Inclusions
+ * and the comparison mapping are unchanged from the original design.
  *
  * NOT carried over from the old design, because they could not be verified:
  *   - "Money-back guarantee" and "30-day free trial" badges
@@ -35,7 +36,7 @@ export const websitePackages: Package[] = [
   {
     id: "standard",
     name: "Standard",
-    price: 450,
+    price: 500,
     billing: "One-off payment",
     summary: "For small businesses starting their digital journey.",
     features: [
@@ -46,9 +47,9 @@ export const websitePackages: Package[] = [
     cta: "Start with Standard",
   },
   {
-    id: "professional",
-    name: "Professional",
-    price: 900,
+    id: "premium",
+    name: "Premium",
+    price: 1200,
     billing: "One-off payment",
     summary: "For growing businesses ready to stand out from competitors.",
     features: [
@@ -60,7 +61,7 @@ export const websitePackages: Package[] = [
       "Analytics dashboard",
     ],
     highlighted: true,
-    cta: "Choose Professional",
+    cta: "Choose Premium",
   },
   {
     id: "enterprise",
@@ -69,7 +70,7 @@ export const websitePackages: Package[] = [
     billing: "Quoted per project",
     summary: "For organisations with complex, multi-channel needs.",
     features: [
-      "Everything in Professional",
+      "Everything in Premium",
       "Bespoke feature development",
       "Dedicated account manager",
       "Unlimited revisions",
@@ -82,15 +83,15 @@ export const websitePackages: Package[] = [
 
 /** Rows for the comparison table. true = included, false = not included. */
 export const comparison: { feature: string; values: Record<string, boolean | string> }[] = [
-  { feature: "Responsive website", values: { standard: true, professional: true, enterprise: true } },
-  { feature: "SEO-ready structure", values: { standard: true, professional: true, enterprise: true } },
-  { feature: "Rounds of revisions", values: { standard: "1", professional: "3", enterprise: "Unlimited" } },
-  { feature: "Custom branding and UI system", values: { standard: false, professional: true, enterprise: true } },
-  { feature: "Social media integration", values: { standard: false, professional: true, enterprise: true } },
-  { feature: "Priority support", values: { standard: false, professional: true, enterprise: true } },
-  { feature: "Analytics dashboard", values: { standard: false, professional: true, enterprise: true } },
-  { feature: "Dedicated account manager", values: { standard: false, professional: false, enterprise: true } },
-  { feature: "Bespoke features and reporting", values: { standard: false, professional: false, enterprise: true } },
+  { feature: "Responsive website", values: { standard: true, premium: true, enterprise: true } },
+  { feature: "SEO-ready structure", values: { standard: true, premium: true, enterprise: true } },
+  { feature: "Rounds of revisions", values: { standard: "1", premium: "3", enterprise: "Unlimited" } },
+  { feature: "Custom branding and UI system", values: { standard: false, premium: true, enterprise: true } },
+  { feature: "Social media integration", values: { standard: false, premium: true, enterprise: true } },
+  { feature: "Priority support", values: { standard: false, premium: true, enterprise: true } },
+  { feature: "Analytics dashboard", values: { standard: false, premium: true, enterprise: true } },
+  { feature: "Dedicated account manager", values: { standard: false, premium: false, enterprise: true } },
+  { feature: "Bespoke features and reporting", values: { standard: false, premium: false, enterprise: true } },
 ];
 
 /**
