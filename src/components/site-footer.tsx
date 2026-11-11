@@ -101,8 +101,9 @@ export function SiteFooter() {
       </div>
 
       {/* Oversized wordmark, carried over from the original footer, using the official logo.
-          It rises into place once as the footer comes into view: the page's closing gesture. */}
-      <div aria-hidden className="container-page select-none overflow-hidden pt-6">
+          It rises into place once as the footer comes into view: the page's closing gesture.
+          It sits fully inside the footer with bottom breathing room, so no letter is clipped. */}
+      <div aria-hidden className="container-page select-none overflow-hidden pb-6 pt-6 sm:pb-8 md:pb-10 lg:pb-12">
         <Reveal inView variant="fade-up" duration={0.9} amount={0.2}>
         <Image
           src="/brand/prolifi-logo-white.png"
@@ -110,7 +111,7 @@ export function SiteFooter() {
           width={1678}
           height={313}
           sizes="100vw"
-          className="h-auto w-full translate-y-[22%] opacity-[0.06] grayscale"
+          className="block h-auto w-full opacity-[0.06] grayscale"
         />
         </Reveal>
       </div>

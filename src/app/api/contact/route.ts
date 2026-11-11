@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { contactSchema, toFieldErrors, type ContactInput, type ContactResponse } from "@/lib/contact-schema";
-import { pillarOptions, serviceOptions } from "@/content/services";
+import { contactSchema, serviceLabel, toFieldErrors, type ContactInput, type ContactResponse } from "@/lib/contact-schema";
 import { site, siteUrl } from "@/content/site";
 import { buildEnquiryEmail } from "@/lib/enquiry-email";
 
@@ -54,8 +53,7 @@ export async function POST(request: Request) {
     return json({ ok: false, message: "Our enquiry form is temporarily unavailable." }, 503);
   }
 
-  const service = resolveService(data.service);
-  const email = buildEnquiryEmail({ ...data, service: service.label, stage: service.stage, siteUrl });
+  const email = buildEnquiryEmail({ ...data, services: data.services.map(serviceLabel), siteUrl });
 
   try {
     const res = await fetch("https://api.resend.com/emails", {
@@ -86,28 +84,16 @@ function json(body: ContactResponse, status = 200) {
   return NextResponse.json(body, { status });
 }
 
-/** Readable service name and its pillar, from the submitted option value (never the raw slug). */
-function resolveService(value: string): { label: string; stage: string } {
-  if (value === "not-sure") return { label: "Not sure yet", stage: "" };
-  const pillar = pillarOptions.find((o) => o.value === value);
-  if (pillar) return { label: "Not sure which service yet", stage: pillar.group };
-  const service = serviceOptions.find((o) => o.value === value);
-  return service ? { label: service.label, stage: service.group } : { label: value, stage: "" };
-}
-
-function serviceLabel(value: string) {
-  const s = resolveService(value);
-  return s.stage ? `${s.stage} / ${s.label}` : s.label;
-}
-
 function formatText(d: ContactInput) {
   return [
-    `Name: ${d.firstName} ${d.lastName}`,
+    `Name: ${d.fullName}`,
     `Email: ${d.email}`,
-    `Business: ${d.business || "-"}`,
-    `Location: ${d.location || "-"}`,
-    `Service of interest: ${serviceLabel(d.service)}`,
+    `Company: ${d.company}`,
+    `Website or social: ${d.link || "-"}`,
+    `Services: ${d.services.map(serviceLabel).join(", ")}`,
+    `More about the services: ${d.servicesNote || "-"}`,
     `Budget: ${d.budget || "-"}`,
+    `Timeline: ${d.timeline || "-"}`,
     "",
     "Message:",
     d.details,

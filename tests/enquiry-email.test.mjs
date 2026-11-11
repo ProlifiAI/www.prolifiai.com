@@ -7,40 +7,51 @@ import assert from "node:assert/strict";
 import { buildEnquiryEmail, enquirySubject, escapeHtml, replyHref } from "../src/lib/enquiry-email.ts";
 
 const base = {
-  firstName: "Ada",
-  lastName: "Okafor",
+  fullName: "Ada Okafor",
   email: "ada@example.com",
-  business: "Okafor Studio",
-  location: "Lagos, Nigeria",
-  service: "Business websites",
-  stage: "Build",
-  budget: "$500 - $1,000",
+  company: "Okafor Studio",
+  link: "okaforstudio.com",
+  services: ["Build a new website"],
+  servicesNote: "",
+  budget: "$500 - $1,200",
+  timeline: "1 to 3 months",
   details: "We need a new website.\n\nIt should take bookings.",
   siteUrl: "https://www.prolifiai.com",
 };
 
-test("shows the submitted values, with service and budget in the summary", () => {
+test("shows the submitted values, with services and budget in the summary", () => {
   const { html, text, subject } = buildEnquiryEmail(base);
-  for (const v of ["Business websites", "Build stage", "$500 - $1,000", "Okafor Studio", "Lagos, Nigeria", "Ada Okafor", "ada@example.com"]) {
+  for (const v of ["Build a new website", "$500 - $1,200", "1 to 3 months", "Okafor Studio", "okaforstudio.com", "Ada Okafor", "ada@example.com"]) {
     assert.ok(html.includes(escapeHtml(v)), `html is missing ${v}`);
   }
   assert.ok(html.indexOf("Service of interest") < html.indexOf("Client details"), "summary comes before client details");
-  assert.match(text, /Service of interest: Business websites \(Build stage\)/);
-  assert.match(text, /Budget range: \$500 - \$1,000/);
-  assert.equal(subject, "New Project Enquiry — Business websites — Okafor Studio");
+  assert.match(text, /Services of interest: Build a new website/);
+  assert.match(text, /Budget range: \$500 - \$1,200/);
+  assert.match(text, /Preferred timeline: 1 to 3 months/);
+  assert.equal(subject, "New Project Enquiry — Build a new website — Okafor Studio");
+});
+
+test("lists every chosen service and the step-one note", () => {
+  const services = ["Build a new website", "Social media management and content", "Digital growth and strategy"];
+  const { html, text, subject } = buildEnquiryEmail({ ...base, services, servicesNote: "Launching in March." });
+  for (const s of services) assert.ok(html.includes(escapeHtml(s)), `html is missing ${s}`);
+  assert.ok(html.includes("Services of interest"));
+  assert.match(text, /Services of interest: Build a new website, Social media management and content, Digital growth and strategy/);
+  assert.ok(html.includes("Launching in March.") && text.includes("Launching in March."));
+  assert.equal(subject, "New Project Enquiry — Build a new website +2 more — Okafor Studio");
 });
 
 test("missing optional fields read 'Not provided', never undefined or empty", () => {
-  const { html, text, subject } = buildEnquiryEmail({ ...base, business: "", location: "   ", budget: "" });
-  assert.equal(subject, "New Project Enquiry — Business websites");
-  assert.equal((text.match(/Not provided/g) ?? []).length, 3);
+  const { html, text, subject } = buildEnquiryEmail({ ...base, company: "", link: "   ", budget: "", timeline: "" });
+  assert.equal(subject, "New Project Enquiry — Build a new website");
+  assert.equal((text.match(/Not provided/g) ?? []).length, 4);
   assert.ok(!/undefined|null|\{\{|\$\{/.test(html), "no raw template output");
   assert.ok(!/undefined|null/.test(text));
 });
 
 test("escapes HTML and special characters in every visitor field", () => {
   const evil = '<script>alert("x")</script> & <b>bold</b> \'quote\'';
-  const { html } = buildEnquiryEmail({ ...base, firstName: evil, business: evil, location: evil, details: evil });
+  const { html } = buildEnquiryEmail({ ...base, fullName: evil, company: evil, link: evil, services: [evil], servicesNote: evil, details: evil });
   assert.ok(!html.includes("<script>"), "no script tag");
   assert.ok(!html.includes("<b>bold</b>"), "no injected markup");
   assert.ok(html.includes("&lt;script&gt;alert(&quot;x&quot;)&lt;/script&gt; &amp; &lt;b&gt;bold&lt;/b&gt; &#39;quote&#39;"));
@@ -54,7 +65,7 @@ test("keeps the message's paragraphs and line breaks", () => {
 });
 
 test("subject cannot carry header injection or line breaks", () => {
-  const subject = enquirySubject({ service: "Websites\r\nBcc: x@evil.test", business: "Acme\nCo" });
+  const subject = enquirySubject({ services: ["Websites\r\nBcc: x@evil.test"], company: "Acme\nCo" });
   assert.ok(!/[\r\n]/.test(subject));
   assert.equal(subject, "New Project Enquiry — Websites Bcc: x@evil.test — Acme Co");
 });

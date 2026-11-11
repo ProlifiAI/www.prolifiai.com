@@ -3,7 +3,7 @@
  *
  * Pure module with no project imports, so it can be rendered and tested on
  * its own (see tests/enquiry-email.test.mjs). The API route resolves the
- * submitted dropdown values into readable labels before calling it.
+ * submitted service ids into readable labels before calling it.
  *
  * Email-client rules followed here: table layout, inline styles only,
  * system fonts, no flexbox/grid, no JavaScript, 640px max width that
@@ -14,16 +14,17 @@
  */
 
 export type EnquiryEmailInput = {
-  firstName: string;
-  lastName: string;
+  fullName: string;
   email: string;
-  business: string;
-  location: string;
-  /** Readable service name, e.g. "Business websites" */
-  service: string;
-  /** Pillar the service belongs to, e.g. "Build"; empty when not applicable */
-  stage: string;
+  company: string;
+  /** Website or social profile, as typed (shown as text, never linked) */
+  link: string;
+  /** Readable service names, e.g. ["Build a new website"] */
+  services: string[];
+  /** Optional note from step 1 about the services */
+  servicesNote: string;
   budget: string;
+  timeline: string;
   details: string;
   /** Absolute site URL, used for the logo and the footer link */
   siteUrl: string;
@@ -79,9 +80,16 @@ export function replyHref(email: string, subject: string): string | null {
   return `mailto:${encodeURIComponent(local)}@${domain}?subject=${encodeURIComponent(subject)}`;
 }
 
-export function enquirySubject(input: Pick<EnquiryEmailInput, "service" | "business">): string {
-  const service = oneLine(input.service) || "General enquiry";
-  const business = oneLine(input.business ?? "");
+/** "Build a new website", or "Build a new website +2 more" when several services were chosen. */
+export function servicesSummary(services: string[]): string {
+  const list = services.map(oneLine).filter(Boolean);
+  if (list.length === 0) return "";
+  return list.length === 1 ? list[0] : `${list[0]} +${list.length - 1} more`;
+}
+
+export function enquirySubject(input: Pick<EnquiryEmailInput, "services" | "company">): string {
+  const service = servicesSummary(input.services) || "General enquiry";
+  const business = oneLine(input.company ?? "");
   return (business ? `New Project Enquiry — ${service} — ${business}` : `New Project Enquiry — ${service}`).slice(0, 200);
 }
 
@@ -127,20 +135,22 @@ function sectionTitle(text: string) {
 }
 
 export function buildEnquiryEmail(input: EnquiryEmailInput): EnquiryEmail {
-  const fullName = oneLine(`${input.firstName} ${input.lastName}`) || NOT_PROVIDED;
+  const fullName = oneLine(input.fullName ?? "") || NOT_PROVIDED;
   const email = input.email.trim();
-  const business = orFallback(input.business);
-  const location = orFallback(input.location);
+  const business = orFallback(input.company);
+  const link = orFallback(oneLine(input.link ?? ""));
   const budget = orFallback(input.budget);
-  const service = orFallback(input.service);
-  const stage = (input.stage ?? "").trim();
+  const timeline = orFallback(input.timeline);
+  const services = (input.services ?? []).map(oneLine).filter(Boolean);
+  const service = services.length ? services.join(", ") : NOT_PROVIDED;
+  const servicesNote = (input.servicesNote ?? "").trim();
   const details = (input.details ?? "").trim() || NOT_PROVIDED;
   const siteUrl = input.siteUrl.replace(/\/$/, "");
   const siteHost = siteUrl.replace(/^https?:\/\//, "");
 
-  const subject = enquirySubject({ service: input.service, business: input.business });
+  const subject = enquirySubject({ services, company: input.company });
   const reply = replyHref(email, "Re: Your project enquiry with Prolifi");
-  const preheader = `${service}${budget !== NOT_PROVIDED ? ` · ${budget}` : ""} · from ${fullName}`;
+  const preheader = `${servicesSummary(services) || service}${budget !== NOT_PROVIDED ? ` · ${budget}` : ""} · from ${fullName}`;
 
   const replyButton = reply
     ? `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:28px;">
@@ -193,8 +203,10 @@ export function buildEnquiryEmail(input: EnquiryEmailInput): EnquiryEmail {
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${c.panel}" style="background-color:${c.panel};border-radius:12px;">
 <tr><td style="padding:24px 24px 22px 24px;">
 ${pair(
-  `${label("Service of interest")}<div class="hero-value" style="margin-top:6px;font-family:${font};font-size:24px;line-height:30px;font-weight:700;color:${service === NOT_PROVIDED ? c.muted : c.navy};">${escapeHtml(service)}</div>${
-    stage ? `<div style="margin-top:6px;font-family:${font};font-size:12px;line-height:16px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:${c.muted};">${escapeHtml(stage)} stage</div>` : ""
+  `${label(services.length > 1 ? "Services of interest" : "Service of interest")}${
+    services.length
+      ? services.map((s, i) => `<div class="${i === 0 ? "hero-value" : ""}" style="margin-top:6px;font-family:${font};font-size:${i === 0 ? 24 : 16}px;line-height:${i === 0 ? 30 : 22}px;font-weight:700;color:${c.navy};">${escapeHtml(s)}</div>`).join("")
+      : `<div class="hero-value" style="margin-top:6px;font-family:${font};font-size:24px;line-height:30px;font-weight:700;color:${c.muted};">${NOT_PROVIDED}</div>`
   }`,
   `${label("Budget range")}<div class="hero-value" style="margin-top:6px;font-family:${font};font-size:24px;line-height:30px;font-weight:700;color:${budget === NOT_PROVIDED ? c.muted : c.navy};">${escapeHtml(budget)}</div>`
 )}
@@ -202,7 +214,9 @@ ${pair(
 <tr><td style="border-top:1px solid #D3DBE8;font-size:0;line-height:0;height:1px;">&nbsp;</td></tr>
 </table>
 <div style="height:18px;line-height:18px;font-size:0;">&nbsp;</div>
-${pair(`${label("Business")}${value(business, { weight: 600 })}`, `${label("Location")}${value(location, { weight: 600 })}`)}
+${pair(`${label("Business")}${value(business, { weight: 600 })}`, `${label("Preferred timeline")}${value(timeline, { weight: 600 })}`)}
+<div style="height:16px;line-height:16px;font-size:0;">&nbsp;</div>
+${label("Website or social")}${value(link, { weight: 600 })}
 </td></tr>
 </table>
 </td></tr>
@@ -220,7 +234,11 @@ ${sectionTitle("Project details")}
 <div style="height:16px;line-height:16px;font-size:0;">&nbsp;</div>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${c.soft}" style="background-color:${c.soft};border:1px solid ${c.line};border-radius:10px;">
 <tr><td style="padding:20px 22px;">${messageHtml(details)}</td></tr>
-</table>
+</table>${
+  servicesNote
+    ? `<div style="height:20px;line-height:20px;font-size:0;">&nbsp;</div>${label("More about what they need")}<div style="height:8px;line-height:8px;font-size:0;">&nbsp;</div><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${c.soft}" style="background-color:${c.soft};border:1px solid ${c.line};border-radius:10px;"><tr><td style="padding:16px 22px;">${messageHtml(servicesNote)}</td></tr></table>`
+    : ""
+}
 ${replyButton}
 </td></tr>
 
@@ -244,10 +262,11 @@ Prolifi AI &middot; Website Enquiry Notification &middot; <a href="${escapeHtml(
     "You've received a new enquiry through the Prolifi website.",
     "",
     "PROJECT SUMMARY",
-    `Service of interest: ${service}${stage ? ` (${stage} stage)` : ""}`,
+    `Services of interest: ${service}`,
     `Budget range: ${budget}`,
+    `Preferred timeline: ${timeline}`,
     `Business: ${business}`,
-    `Location: ${location}`,
+    `Website or social: ${link}`,
     "",
     "CLIENT DETAILS",
     `Full name: ${fullName}`,
@@ -255,6 +274,7 @@ Prolifi AI &middot; Website Enquiry Notification &middot; <a href="${escapeHtml(
     "",
     "PROJECT DETAILS",
     details.replace(/\r\n?/g, "\n"),
+    ...(servicesNote ? ["", "MORE ABOUT WHAT THEY NEED", servicesNote.replace(/\r\n?/g, "\n")] : []),
     "",
     reply ? `Reply to this email to respond to ${fullName} directly.` : "",
     "",

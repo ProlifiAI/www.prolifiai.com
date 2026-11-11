@@ -67,6 +67,8 @@ export const hoverLabels: Record<string, string> = {
   "Choose Premium": "Go Premium",
   "Contact Us": "Let's Talk",
   "Send Message": "Send to Prolifi",
+  Continue: "Next Step",
+  "Submit Enquiry": "Send to Prolifi",
 };
 
 /**
